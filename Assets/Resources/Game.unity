@@ -105,8 +105,8 @@ MonoBehaviour:
   myInterface: {fileID: 1314649144}
   timeLeft: 0
   startTime: 60
-  animationTime: 2
   chosenInput: 0
+  tickToChangeColor: 3
 --- !u!4 &79124294
 Transform:
   m_ObjectHideFlags: 0
@@ -212,8 +212,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1490732466}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: 0}
-  m_AnchorMax: {x: .5, y: 1}
+  m_AnchorMin: {x: .5, y: .100000001}
+  m_AnchorMax: {x: .5, y: .899999976}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 256, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -360,8 +360,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 255754882}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: 0}
-  m_AnchorMax: {x: .5, y: 1}
+  m_AnchorMin: {x: .5, y: .100000001}
+  m_AnchorMax: {x: .5, y: .899999976}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 256, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -550,8 +550,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1198783233}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: 0}
-  m_AnchorMax: {x: .5, y: 1}
+  m_AnchorMin: {x: .5, y: .100000001}
+  m_AnchorMax: {x: .5, y: .899999976}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 256, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -740,8 +740,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1161677390}
   m_RootOrder: 1
-  m_AnchorMin: {x: .850000024, y: .400000006}
-  m_AnchorMax: {x: .850000024, y: .600000024}
+  m_AnchorMin: {x: .649999976, y: .100000001}
+  m_AnchorMax: {x: .649999976, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 128, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -873,8 +873,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 255754882}
   m_RootOrder: 1
-  m_AnchorMin: {x: .850000024, y: .400000006}
-  m_AnchorMax: {x: .850000024, y: .600000024}
+  m_AnchorMin: {x: .649999976, y: .100000001}
+  m_AnchorMax: {x: .649999976, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 64, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -1045,8 +1045,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1161677390}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: 0}
-  m_AnchorMax: {x: .5, y: 1}
+  m_AnchorMin: {x: .5, y: .100000001}
+  m_AnchorMax: {x: .5, y: .899999976}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 256, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -1109,8 +1109,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1490732466}
   m_RootOrder: 1
-  m_AnchorMin: {x: .850000024, y: .400000006}
-  m_AnchorMax: {x: .850000024, y: .600000024}
+  m_AnchorMin: {x: .649999976, y: .100000001}
+  m_AnchorMax: {x: .649999976, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 128, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -1264,6 +1264,7 @@ GameObject:
   - 224: {fileID: 2038033482}
   - 222: {fileID: 2038033484}
   - 114: {fileID: 2038033483}
+  - 95: {fileID: 2038033485}
   m_Layer: 0
   m_Name: Button Wrapper
   m_TagString: Untagged
@@ -1319,6 +1320,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2038033481}
+--- !u!95 &2038033485
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2038033481}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 538da6f04b2904d60a8cb4059af8f861, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &2132866032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,8 +1365,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1198783233}
   m_RootOrder: 1
-  m_AnchorMin: {x: .850000024, y: .400000006}
-  m_AnchorMax: {x: .850000024, y: .600000024}
+  m_AnchorMin: {x: .649999976, y: .100000001}
+  m_AnchorMax: {x: .649999976, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 128, y: 0}
   m_Pivot: {x: .5, y: .5}

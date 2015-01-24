@@ -13,25 +13,27 @@ public class GameManager : MonoBehaviour {
 
 	public float timeLeft;
 	public float startTime = 60;
-	public float animationTime = 2f;
+	private float animationTime = 2f;
+    const float DELAY = 5f;
 
 	//Inputs
 	public int chosenInput = 0; //Input chosen by the player this turn
 	private bool isChoosing = false;
 	private bool gameIsOn = false;
-    private bool gameIsRunning = true;
+    private bool gameIsPaused = false;
+    private bool pauseIsPressed = false;
 
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
+    private int malusTemps = 1;
 
-    const int PAUSE_TIMER = 10;
 
 	private int amountOfColors = 4; //Amount of different colors
 	private int currentColor = -1; //current color, we start with -1 which is none
 	private int tickSinceLastChange = 0; //amount of ticks since last change we had. When this reaches tickToChangeColor, Change Color
 	public int tickToChangeColor = 3; //Change color every X Tick
 
-    int timer = PAUSE_TIMER;
+   
 
 	//Sounds
 	public List<AudioClip> myAudioClips; //List of Audioclips used
@@ -40,46 +42,72 @@ public class GameManager : MonoBehaviour {
 	private float timeInBetweenSounds = 1f; //cant have 2 sounds in the same second
 
 	// Use this for initialization
-	void Awake() {
+	void Awake(){
 		gameObject.tag = "GameManager"; //Give Tag
 		LoadSounds(); //Create a AudioSource and gets AudioClips in Resources.
 	}
 
 	void Start () {
-
 	}
 	
 
 	// Update is called once per frame
-	void Update () {
-		if(gameIsOn) {
-            if(gameIsRunning)
-            {
-			timeLeft -= Time.deltaTime; //Timer
-			if(timeLeft <= 0) EndGame ();
-            }
-		} else {
-			if(Input.GetAxis("Start") > 0) StartGame ();
-		}
-        if (timer < PAUSE_TIMER)
+    void Update()
+    {
+        if (gameIsOn)
         {
-            timer++;
-        }
-        else{
-            if (Input.GetAxis("Start") > 0) Pause();
-            timer = 0;
-        }
-        
-		//Check for inputs if player can choose
-		if(isChoosing) {
-			CheckInputs();
-		}
+            //if (gameIsRunning)
+            //{
+            //    timeLeft -= (Time.deltaTime * malusTemps); //Timer
+            //    if (timeLeft <= 0) EndGame();
+            //}
+            //if (!pauseIsPressed)
+            //{
+            //    if (Input.GetAxis("Start") > 0) Pause();
+            //}
 
-	}
+            //if (Input.GetAxis("Start") == 0) pauseIsPressed = false;
+            if(gameIsPaused)
+            {
+                if (!pauseIsPressed)
+                {
+                    if (Input.GetAxis("Start") > 0) Unpause();
+                }
+            }
+            else
+            {
+                timeLeft -= (Time.deltaTime * malusTemps); //Timer
+                if (timeLeft <= 0) EndGame();
+                if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Pause();
+            }
+        }
+        else
+        {
+            if (Input.GetAxis("Start") > 0) StartGame();
+        }
+        if (Input.GetAxis("Start") == 0) pauseIsPressed = false;
+
+
+        //Check for inputs if player can choose
+        if (isChoosing)
+        {
+            CheckInputs();
+        }
+    }
+    
 
     void Pause() {
+        gameIsPaused = true;
+        pauseIsPressed = true;
+        Time.timeScale = 0;
+    }
 
-        gameIsRunning = !gameIsRunning;
+    void Unpause()
+    {
+        gameIsPaused = false;
+        pauseIsPressed = true;
+        Time.timeScale = 1;
+        
     }
 
 	private void LoadSounds(){ //Create a AudioSource and gets AudioClips in Resources.
@@ -173,6 +201,7 @@ public class GameManager : MonoBehaviour {
 		}
 		//Restart Coroutine
 		gameIsOn = true;
+        pauseIsPressed = true;
 		StartCoroutine("ChoiceTimer");
 	}
 
@@ -219,17 +248,17 @@ public class GameManager : MonoBehaviour {
 
 
 
-	IEnumerator ChoiceTimer() { //This functions loops the game choices, this is interrupted and recalled when the player chooses an action
-		while(true) {
-			MakeNextChoice();
-			StartCoroutine(AnimateButtons()); //Animate it
-			yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
-			isChoosing = true; //give back controls
-			yield return new WaitForSeconds(15f);
-			//Go To Next Choice
-			isChoosing = false;
-
-		}
+	IEnumerator ChoiceTimer() {
+        while (true)
+        {
+            MakeNextChoice();
+            StartCoroutine(AnimateButtons()); //Animate it
+            yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
+            isChoosing = true; //give back controls
+            yield return new WaitForSeconds(DELAY);
+            //Go To Next Choice
+            isChoosing = false;
+        }
 	}
 
 	IEnumerator AnimateButtons(){ //This animates the alpha of the buttons
