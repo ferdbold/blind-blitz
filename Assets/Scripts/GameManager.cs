@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour {
 			StartCoroutine(AnimateButtons());
 			yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
 			isChoosing = true; //give back controls
-			yield return new WaitForSeconds(5f);
+			yield return new WaitForSeconds(15f);
 			//Go To Next Choice
 			isChoosing = false;
 

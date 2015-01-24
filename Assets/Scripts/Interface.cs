@@ -6,6 +6,7 @@ public class Interface : MonoBehaviour {
 	public  Text timerGUI;
 	public Image[] options;
 	public Image[] secOptions;
+	public Image Background;
 
 	public Sprite[] InputSprites_Arrows; // up, right, down, left
 	public Sprite[] InputSprites_Triggers; // RT, LT, RJ, LJ
@@ -34,9 +35,16 @@ public class Interface : MonoBehaviour {
 	public void ChangeOptions(PlayerChoice p){
 		ChangeMainChoice (p.curChoice);
 		ChangeSecondaryChoice(p.nextChoices);
-		
+		if(Random.Range(0,100) > 80) ChangeColor();
 	}
 
+	private void ChangeColor() {
+		int c = Random.Range (0,4);
+		if(c==0) Background.color = Color.red;
+		else if(c==1) Background.color = Color.yellow;
+		else if(c==2) Background.color = Color.green;
+		else Background.color = Color.blue;
+	}
 
 	private void ChangeMainChoice(choiceType mainChoice){ //Changes main color of choice
 		switch (mainChoice) {
