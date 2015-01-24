@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class Interface : MonoBehaviour {
 
 	public Text timerGUI;
+    public Text pauseGUI;
+    public Text endGameGUI;
 	public Image[] options;
 	public Image[] secOptions;
 	public Image Background;
@@ -25,6 +27,11 @@ public class Interface : MonoBehaviour {
 	void Update () {
 		//Timer
 		timerGUI.text = manager.timeLeft.ToString("F2");
+        if(!manager.gameIsPaused)
+        { pauseGUI.enabled = false; }
+        else
+        { pauseGUI.enabled = true; }
+
 	}
 
 	public void ChangeOptions(PlayerChoice p){

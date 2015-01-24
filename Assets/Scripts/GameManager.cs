@@ -24,8 +24,9 @@ public class GameManager : MonoBehaviour {
 	public int chosenInput = 0; //Input chosen by the player this turn
 	private bool isChoosing = false;
 	private bool gameIsOn = false;
-    private bool gameIsPaused = false;
+    public bool gameIsPaused = false;
     private bool pauseIsPressed = false;
+    public bool gameOver = false;
 
 	//Rumble
 	private float timeUntilLightRumble; //Time until controller starts to vibrate and player can make a choice
@@ -61,10 +62,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-  
-        
 
-        
 	}
 
 	void OnApplicationQuit(){
@@ -218,6 +216,7 @@ public class GameManager : MonoBehaviour {
 
 	void StartGame() {
 		//Restart Time
+        gameOver = false;
 		timeLeft = startTime;
 		//Create the first choice at random
 		currentChoice = new PlayerChoice();		
