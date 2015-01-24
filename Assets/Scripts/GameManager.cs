@@ -54,8 +54,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (gameIsOn)
-        {
+        if (gameIsOn) {
             //if (gameIsRunning)
             //{
             //    timeLeft -= (Time.deltaTime * malusTemps); //Timer
@@ -67,25 +66,26 @@ public class GameManager : MonoBehaviour {
             //}
 
             //if (Input.GetAxis("Start") == 0) pauseIsPressed = false;
-            if(gameIsPaused)
-            {
-                if (!pauseIsPressed)
-                {
-                    if (Input.GetAxis("Start") > 0) Unpause();
-                }
+
+            if(gameIsPaused) {
+            	if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Unpause();     
             }
-            else
-            {
-                timeLeft -= (Time.deltaTime * malusTemps); //Timer
-                if (timeLeft <= 0) EndGame();
-                if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Pause();
-            }
-        }
-        else
-        {
+			//Tick Timer, Check for Ending
+            timeLeft -= (Time.deltaTime * malusTemps); //Timer
+            if (timeLeft <= 0) EndGame();
+            if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Pause();
+
+        } else {
             if (Input.GetAxis("Start") > 0) StartGame();
         }
-        if (Input.GetAxis("Start") == 0) pauseIsPressed = false;
+
+		//Update Pause input constantly
+        if (Input.GetAxis("Start") <= 0.1f) {
+			pauseIsPressed = false;
+		}
+
+
+		Debug.Log ( pauseIsPressed);
 
 
         //Check for inputs if player can choose
@@ -96,17 +96,18 @@ public class GameManager : MonoBehaviour {
     }
     
 
-    void Pause() {
+    void Pause() { /// TEMPORARY : REMOVED TIMESALE
+		Debug.Log ("Paused");
         gameIsPaused = true;
         pauseIsPressed = true;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
-    void Unpause()
-    {
+    void Unpause() {
+		Debug.Log ("UnPaused");
         gameIsPaused = false;
         pauseIsPressed = true;
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         
     }
 
