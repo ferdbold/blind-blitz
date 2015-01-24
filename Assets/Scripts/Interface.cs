@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class Interface : MonoBehaviour {
 
-	public  Text timerGUI;
+	public Text timerGUI;
 	public Image[] options;
 	public Image[] secOptions;
 	public Image Background;
@@ -15,17 +15,14 @@ public class Interface : MonoBehaviour {
 
 
 	private GameManager manager;
-	
-	// Use this for initialization
+
 	void Start () {
 		manager = (GameManager) GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		//Timer
 		timerGUI.text = manager.timeLeft.ToString("F2");
-
 	}
 
 	public void ChangeOptions(PlayerChoice p){
