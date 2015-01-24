@@ -108,6 +108,7 @@ MonoBehaviour:
   animationTime: .400000006
   chosenInput: 0
   tickToChangeColor: 3
+  myAudioClips: []
 --- !u!4 &79124294
 Transform:
   m_ObjectHideFlags: 0
@@ -981,21 +982,25 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b350836f59f194b079026ebc06cd048e, type: 3}
   - {fileID: 21300000, guid: 352e9a611e8be4b689493cd5d39a905c, type: 3}
   - {fileID: 21300000, guid: 0ddcb7378a607420ba6cd86cc9f289f7, type: 3}
+  - {fileID: 21300000, guid: f8b968aef8db44fc8abbbcb006e88909, type: 3}
   InputSprites_Triggers:
   - {fileID: 21300000, guid: ec7439da01f174fd681f985ac56976b1, type: 3}
   - {fileID: 21300000, guid: 2e92fe88b17054fe59ca4478d3d4826e, type: 3}
   - {fileID: 21300000, guid: 0970a17fd18ab415687b974e45968675, type: 3}
   - {fileID: 21300000, guid: 81712026a0206401a9ea3516f9070397, type: 3}
+  - {fileID: 21300000, guid: ee9fb4aff40b049bfaf92cec0903f951, type: 3}
   InputSprites_ButtonsPS:
   - {fileID: 21300000, guid: 276d2b9f063784576b58f4e8088cccf4, type: 3}
   - {fileID: 21300000, guid: b01d4b87739b141688c557a643c13783, type: 3}
   - {fileID: 21300000, guid: 04f46e321245f4fba9af50702f2f7bf6, type: 3}
   - {fileID: 21300000, guid: ba3bf5bb83f7847b3ae0b24135cd2956, type: 3}
+  - {fileID: 21300000, guid: 0da2fab747a75453e8b4d65108d5b180, type: 3}
   InputSprites_ButtonsXbox:
   - {fileID: 21300000, guid: db6c79b4c8a564d55a9d41ed3ee35ae9, type: 3}
   - {fileID: 21300000, guid: 0433f7f8b2fff4e8eb47c27e3cf44661, type: 3}
   - {fileID: 21300000, guid: 81666b30d43a6419ba91ebd9f711d4ec, type: 3}
   - {fileID: 21300000, guid: 81666b30d43a6419ba91ebd9f711d4ec, type: 3}
+  - {fileID: 21300000, guid: e65420f7103464aaa91121ae99b326b9, type: 3}
 --- !u!224 &1314649145
 RectTransform:
   m_ObjectHideFlags: 0

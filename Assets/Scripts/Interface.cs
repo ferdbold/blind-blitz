@@ -69,13 +69,13 @@ public class Interface : MonoBehaviour {
 		for(int i=0; i<secOptions.Length; i++){
 			switch (secChoices[i]) {
 				case choiceType.arrows:
-					secOptions[i].sprite = InputSprites_Arrows[0];
+					secOptions[i].sprite = InputSprites_Arrows[4];
 					break;
 				case choiceType.buttons:
-					secOptions[i].sprite = InputSprites_ButtonsPS[0];
+					secOptions[i].sprite = InputSprites_ButtonsPS[4];
 					break;
 				case choiceType.triggers:
-				secOptions[i].sprite = InputSprites_Triggers[0];
+				secOptions[i].sprite = InputSprites_Triggers[4];
 					break;
 			}
 		}
