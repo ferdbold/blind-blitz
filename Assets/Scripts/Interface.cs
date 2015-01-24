@@ -81,12 +81,20 @@ public class Interface : MonoBehaviour {
 	}
 
 	public void OnSelectInput(int choice) {
-		buttonEffectsAnimators [choice].SetTrigger ("SelectInput");
+		for (var i = 0; i < buttonEffectsAnimators.Length; i++) {
+			Animator b = buttonEffectsAnimators [i];
+
+			if (i == choice) {
+				b.SetTrigger ("SelectInput");
+			}
+
+			b.SetBool ("ReadyInput", false);
+		}
 	}
 
 	public void OnReadyInput() {
 		foreach (Animator a in buttonEffectsAnimators) {
-			a.SetTrigger("ReadyInput");
+			a.SetBool("ReadyInput", true);
 		}
 	}
 
