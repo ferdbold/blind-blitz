@@ -33,12 +33,16 @@ public class GameManager : MonoBehaviour {
 
     int timer = PAUSE_TIMER;
 
+	//Sounds
+	public List<AudioClip> myAudioClips; //List of Audioclips used
+	private AudioSource audioSource; //AudioSource Created on Awake
+	private bool canPlaySound = true; //Can we currently play sound
+	private float timeInBetweenSounds = 1f; //cant have 2 sounds in the same second
+
 	// Use this for initialization
 	void Awake() {
-		//Give Tag
-		gameObject.tag = "GameManager";
-
-
+		gameObject.tag = "GameManager"; //Give Tag
+		LoadSounds(); //Create a AudioSource and gets AudioClips in Resources.
 	}
 
 	void Start () {
@@ -78,62 +82,74 @@ public class GameManager : MonoBehaviour {
         gameIsRunning = !gameIsRunning;
     }
 
+	private void LoadSounds(){ //Create a AudioSource and gets AudioClips in Resources.
+		audioSource = (AudioSource) gameObject.AddComponent<AudioSource>();
+		myAudioClips = new List<AudioClip>();
+		myAudioClips.Add((AudioClip) Resources.Load("Sounds/Sound_Error"));
+	}
 
 	void CheckInputs(){
 		if(Input.GetAxis("Left") > 0) {
 			Debug.Log ("Pressed Left");
 			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(2);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Right") > 0) {
 			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(3);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Up") > 0) {
 			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(1);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Down") > 0) {
 			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(4);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 
 		if(Input.GetAxis("Triangle") > 0) {
 			Debug.Log ("Pressed Triangle");
 			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(1);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Square") > 0) {
 			Debug.Log ("Pressed Square");
 			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(2);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("X") > 0) {
 			Debug.Log ("Pressed Cross");
 			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(4);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Round") > 0) {
 			Debug.Log ("Pressed Circle");
 			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(3);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 
 		if(Input.GetAxis("LT") > 0) {
 			if(currentChoice.curChoice == choiceType.triggers) ChooseInput(1);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("RT") > 0) {
 			if(currentChoice.curChoice == choiceType.triggers) ChooseInput(3);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("LJ") > 0) {
 			if(currentChoice.curChoice == choiceType.triggers) ChooseInput(2);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("RJ") > 0) {
 			if(currentChoice.curChoice == choiceType.triggers) ChooseInput(4);
-			//else PLAY ERROR SOUND 
+			else PlaySound(myAudioClips[0]); 
+		}
+	}
+
+	void PlaySound(AudioClip soundToPlay){
+		if(canPlaySound) {
+			audioSource.PlayOneShot(soundToPlay);
+			StartCoroutine (SoundCooldown());
 		}
 	}
 
@@ -203,7 +219,7 @@ public class GameManager : MonoBehaviour {
 
 
 
-	IEnumerator ChoiceTimer() {
+	IEnumerator ChoiceTimer() { //This functions loops the game choices, this is interrupted and recalled when the player chooses an action
 		while(true) {
 			MakeNextChoice();
 			StartCoroutine(AnimateButtons()); //Animate it
@@ -216,7 +232,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	IEnumerator AnimateButtons(){
+	IEnumerator AnimateButtons(){ //This animates the alpha of the buttons
 		//Create A list of all Images to change alpha
 		List<Image> myImages = new List<Image>();
 		foreach(Image image in myInterface.options) myImages.Add(image);
@@ -234,6 +250,12 @@ public class GameManager : MonoBehaviour {
 			yield return null;
 		}
 		foreach(Image image in myImages) image.color = new Color(1,1,1,1);
+	}
+
+	IEnumerator SoundCooldown(){
+		canPlaySound = false;
+		yield return new WaitForSeconds(timeInBetweenSounds);
+		canPlaySound = true;
 	}
 
 
