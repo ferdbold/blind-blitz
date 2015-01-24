@@ -7,7 +7,10 @@ public class Interface : MonoBehaviour {
 	public Image[] options;
 	public Image[] secOptions;
 
-	public Sprite[] InputSprites; 
+	public Sprite[] InputSprites_Arrows; // up, right, down, left
+	public Sprite[] InputSprites_Triggers; // RT, LT, RJ, LJ
+	public Sprite[] InputSprites_ButtonsPS; // triangle, square, x, round
+	public Sprite[] InputSprites_ButtonsXbox; // Y,X,A,B
 	/*
 	 * 0-3: up, right, down, left
 	 * 4-7: triangle, square, x, round
@@ -39,17 +42,20 @@ public class Interface : MonoBehaviour {
 		switch (mainChoice) {
 		case choiceType.arrows:
 			for(int i=0; i<options.Length; i++) {
-				options[i].color = Color.red;
+				options[i].sprite = InputSprites_Arrows[i];
 			}
 			break;
 		case choiceType.buttons:
 			for(int i=0; i<options.Length; i++) {
-				options[i].color = Color.blue;
+				options[i].sprite = InputSprites_ButtonsPS[i];
+				//TODO : If Xbox Controller, Do
+				//options[i].sprite = InputSprites_ButtonsXbox[i]
+
 			}
 			break;
 		case choiceType.triggers:
 			for(int i=0; i<options.Length; i++) {
-				options[i].color = Color.green;
+				options[i].sprite = InputSprites_Triggers[i];
 			}
 			break;
 		}
