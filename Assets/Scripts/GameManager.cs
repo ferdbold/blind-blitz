@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using XInputDotNetPure;
+
 
 public enum choiceType {arrows,buttons,triggers};
 
@@ -14,7 +16,7 @@ public class GameManager : MonoBehaviour {
 	public float timeLeft;
 	public float startTime = 60;
 	private float animationTime = 2f;
-    const float DELAY = 5f;
+    const float AUTO_SWITCH_DELAY = 10f;
 
 	//Inputs
 	public int chosenInput = 0; //Input chosen by the player this turn
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour {
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
     private int malusTemps = 1;
+    const int CHOICE_DELAY = 5;
 
 
 	private int amountOfColors = 4; //Amount of different colors
@@ -42,6 +45,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
+  
+        GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+        
 	}
 	
 
@@ -237,7 +243,7 @@ public class GameManager : MonoBehaviour {
             StartCoroutine(AnimateButtons()); //Animate it
             yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
             isChoosing = true; //give back controls
-            yield return new WaitForSeconds(DELAY);
+            yield return new WaitForSeconds(AUTO_SWITCH_DELAY);
             //Go To Next Choice
             isChoosing = false;
         }
