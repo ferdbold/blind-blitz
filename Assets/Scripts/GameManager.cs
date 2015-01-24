@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
 
 	public float timeLeft;
 	public float startTime = 60;
-	public float animationTime = 2f;
+	public float animationTime = 0.5f;
 
 	//Inputs
 	public int chosenInput = 0; //Input chosen by the player this turn
@@ -201,8 +201,6 @@ public class GameManager : MonoBehaviour {
 		return newColor;
 	}
 
-
-
 	IEnumerator ChoiceTimer() {
 		while(true) {
 			MakeNextChoice();
@@ -217,6 +215,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	IEnumerator AnimateButtons(){
+		// Start layout animation
+		myInterface.buttonWrapperAnimator.SetBool("IsCrossLayout", isCrossLayout());
+
+		AnimatorStateInfo currentState = myInterface.buttonWrapperAnimator.GetCurrentAnimatorStateInfo(0);
+
+		Debug.Log (currentState.normalizedTime % 1);
+		
 		//Create A list of all Images to change alpha
 		List<Image> myImages = new List<Image>();
 		foreach(Image image in myInterface.options) myImages.Add(image);
@@ -236,5 +241,7 @@ public class GameManager : MonoBehaviour {
 		foreach(Image image in myImages) image.color = new Color(1,1,1,1);
 	}
 
-
+	private bool isCrossLayout() {
+		return currentChoice.curChoice != choiceType.triggers;
+	}
 }
