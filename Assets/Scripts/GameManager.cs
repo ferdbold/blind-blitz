@@ -75,26 +75,27 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (gameIsOn) {
-            if(gameIsPaused) {
-            	if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Unpause();     
+        if (gameIsOn)
+        {
+            if (gameIsPaused)
+            {
+                if (Input.GetButtonDown("Start")) Unpause();
             }
-			//Tick Timer, Check for Ending
-            timeLeft -= (Time.deltaTime * malusTemps); //Timer
-            if (timeLeft <= 0) EndGame();
-			//Check for inputs if player can choose
-			CheckInputs();
-
-			//Pause
-			if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Pause();
-		} else { // ELse, start game if start pressed
-            if (Input.GetAxis("Start") > 0) StartGame();
+            else
+            {
+                //Tick Timer, Check for Ending
+                timeLeft -= (Time.deltaTime * malusTemps); //Timer
+                if (timeLeft <= 0) EndGame();
+                //Check for inputs if player can choose
+                CheckInputs();
+                //Pause
+                if (Input.GetButtonDown("Start")) Pause();
+            }
         }
-
-		//Update Pause input constantly
-        if (Input.GetAxis("Start") <= 0.1f) {
-			pauseIsPressed = false;
-		}
+        else
+        { // ELse, start game if start pressed
+            if (Input.GetButtonDown("Start")) StartGame();
+        }
 
 		//Rumble if needed :
 		if(isHeavyRumbling) {
@@ -110,11 +111,13 @@ public class GameManager : MonoBehaviour {
 		//Debug.Log ("Paused");
         gameIsPaused = true;
         pauseIsPressed = true;
+
+        Debug.Log("game is paused");
         //Time.timeScale = 0;
     }
 
     void Unpause() {
-		//Debug.Log ("UnPaused");
+
         gameIsPaused = false;
         pauseIsPressed = true;
         //Time.timeScale = 1;

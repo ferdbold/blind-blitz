@@ -836,6 +836,7 @@ GameObject:
   - 224: {fileID: 1272831965}
   - 222: {fileID: 1272831967}
   - 114: {fileID: 1272831966}
+  - 114: {fileID: 1272831968}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -895,6 +896,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1272831964}
+--- !u!114 &1272831968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1272831964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ba2f1a57f810a4b99bfbd377c205b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSecond: 0
 --- !u!1 &1296610693
 GameObject:
   m_ObjectHideFlags: 0
