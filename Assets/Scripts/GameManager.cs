@@ -70,9 +70,12 @@ public class GameManager : MonoBehaviour {
 			//Tick Timer, Check for Ending
             timeLeft -= (Time.deltaTime * malusTemps); //Timer
             if (timeLeft <= 0) EndGame();
-            if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Pause();
+			//Check for inputs if player can choose
+			CheckInputs();
 
-        } else {
+			//Pause
+			if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Pause();
+		} else { // ELse, start game if start pressed
             if (Input.GetAxis("Start") > 0) StartGame();
         }
 
@@ -90,11 +93,7 @@ public class GameManager : MonoBehaviour {
 		} else if(isLightRumbling) {
 			//TODO : RUMBLE LIGHTLY
 		}
-        //Check for inputs if player can choose
-        if (isChoosing)
-        {
-            CheckInputs();
-        }
+       
     }
     
 
@@ -122,59 +121,64 @@ public class GameManager : MonoBehaviour {
 	void CheckInputs(){
 		if(Input.GetAxis("Left") > 0) {
 			Debug.Log ("Pressed Left");
-			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(2);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(2);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Right") > 0) {
-			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(3);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(3);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Up") > 0) {
-			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(1);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(1);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Down") > 0) {
-			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(4);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(4);
+			else OnInputError(myAudioClips[0]); 
 		}
 
 		if(Input.GetAxis("Triangle") > 0) {
 			Debug.Log ("Pressed Triangle");
-			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(1);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.buttons && isLightRumbling) ChooseInput(1);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Square") > 0) {
 			Debug.Log ("Pressed Square");
-			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(2);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.buttons && isLightRumbling) ChooseInput(2);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("X") > 0) {
 			Debug.Log ("Pressed Cross");
-			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(4);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.buttons && isLightRumbling) ChooseInput(4);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("Round") > 0) {
 			Debug.Log ("Pressed Circle");
-			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(3);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.buttons && isLightRumbling) ChooseInput(3);
+			else OnInputError(myAudioClips[0]); 
 		}
 
 		if(Input.GetAxis("LT") > 0) {
-			if(currentChoice.curChoice == choiceType.triggers) ChooseInput(1);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.triggers && isLightRumbling) ChooseInput(1);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("RT") > 0) {
-			if(currentChoice.curChoice == choiceType.triggers) ChooseInput(3);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.triggers && isLightRumbling) ChooseInput(3);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("LJ") > 0) {
-			if(currentChoice.curChoice == choiceType.triggers) ChooseInput(2);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.triggers && isLightRumbling) ChooseInput(2);
+			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetAxis("RJ") > 0) {
-			if(currentChoice.curChoice == choiceType.triggers) ChooseInput(4);
-			else PlaySound(myAudioClips[0]); 
+			if(currentChoice.curChoice == choiceType.triggers && isLightRumbling) ChooseInput(4);
+			else OnInputError(myAudioClips[0]); 
 		}
+	}
+
+	void OnInputError(AudioClip soundToPlay){
+		PlaySound(soundToPlay); //play error Sound
+		//myInterface.OnError();
 	}
 
 	void PlaySound(AudioClip soundToPlay){
@@ -187,9 +191,11 @@ public class GameManager : MonoBehaviour {
 	void ChooseInput(int newInput) {
 		chosenInput = newInput-1; //Adjust to correspond to table index
 		isChoosing = false;
-		//Debug.Log ("Chosen Input : " + chosenInput + "    Current Choice : " + currentChoice.curChoice + "    Next Choice : " + currentChoice.nextChoices[chosenInput]); 
+		//Restart The coroutine that manages Choices and Input
 		StopCoroutine("ChoiceTimer");
 		StartCoroutine("ChoiceTimer");
+		//Send Event to Interface
+		//MyInterface.OnSelectInput(chosenInput);
 	}
 
 	void StartGame() {
@@ -233,6 +239,7 @@ public class GameManager : MonoBehaviour {
 		isHeavyRumbling = false;
 		isLightRumbling = false;
 		timeUntilLightRumble = Random.Range (timeUntilLightRumble_MIN,timeUntilLightRumble_MAX);
+		malusTemps = 1;
 		//Make a new choice
 		currentChoice = CreatePlayerChoice(); 
 		//Update Color
@@ -255,8 +262,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	IEnumerator ChoiceTimer() {
-        while (true)
-        {
+        //while (true) {
             MakeNextChoice();
             StartCoroutine(AnimateButtons()); //Animate it
             yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
@@ -266,9 +272,10 @@ public class GameManager : MonoBehaviour {
 			yield return new WaitForSeconds(timeUntilHeavyRumble);
 			isHeavyRumbling = true;
 			malusTemps = 2;
+
             //Go To Next Choice
-            isChoosing = false;
-        }
+            //isChoosing = false;
+        //}
 	}
 	
 	IEnumerator AnimateButtons(){
