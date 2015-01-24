@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
 
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
-    private int malusTemps = 1;
+    private float malusTemps = 1;
     const int CHOICE_DELAY = 5;
 
 
@@ -73,26 +73,27 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (gameIsOn) {
-            if(gameIsPaused) {
-            	if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Unpause();     
+        if (gameIsOn)
+        {
+            if (gameIsPaused)
+            {
+                if (Input.GetButtonDown("Start")) Unpause();
             }
-			//Tick Timer, Check for Ending
-            timeLeft -= (Time.deltaTime * malusTemps); //Timer
-            if (timeLeft <= 0) EndGame();
-			//Check for inputs if player can choose
-			CheckInputs();
-
-			//Pause
-			if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Pause();
-		} else { // ELse, start game if start pressed
-            if (Input.GetAxis("Start") > 0) StartGame();
+            else
+            {
+                //Tick Timer, Check for Ending
+                timeLeft -= (Time.deltaTime * malusTemps); //Timer
+                if (timeLeft <= 0) EndGame();
+                //Check for inputs if player can choose
+                CheckInputs();
+                //Pause
+                if (Input.GetButtonDown("Start")) Pause();
+            }
         }
-
-		//Update Pause input constantly
-        if (Input.GetAxis("Start") <= 0.1f) {
-			pauseIsPressed = false;
-		}
+        else
+        { // ELse, start game if start pressed
+            if (Input.GetButtonDown("Start")) StartGame();
+        }
 
 		//Rumble if needed :
 		if(isHeavyRumbling) {
@@ -105,19 +106,26 @@ public class GameManager : MonoBehaviour {
     
 
     void Pause() { /// TEMPORARY : REMOVED TIMESALE
-		Debug.Log ("Paused");
+		//Debug.Log ("Paused");
         gameIsPaused = true;
         pauseIsPressed = true;
+
+        Debug.Log("game is paused");
         //Time.timeScale = 0;
     }
 
     void Unpause() {
-		Debug.Log ("UnPaused");
+
         gameIsPaused = false;
         pauseIsPressed = true;
         //Time.timeScale = 1;
         
     }
+
+	public bool isGameOn() {
+		if(gameIsOn) return true;
+		else return false;
+	}
 
 	private void LoadSounds(){ //Create a AudioSource and gets AudioClips in Resources.
 		audioSource = (AudioSource) gameObject.AddComponent<AudioSource>();
@@ -223,7 +231,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnInputError(AudioClip soundToPlay){
-		Debug.Log ("error");
+		//Debug.Log ("error");
 		PlaySound(soundToPlay); //play error Sound
 		myInterface.OnError();
 	}
@@ -321,7 +329,7 @@ public class GameManager : MonoBehaviour {
 			myInterface.OnReadyInput ();
 			yield return new WaitForSeconds(timeUntilHeavyRumble);
 			isHeavyRumbling = true;
-			malusTemps = 2;
+			malusTemps = 2.5f;
 
             //Go To Next Choice
             //isChoosing = false;
