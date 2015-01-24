@@ -19,11 +19,15 @@ public class GameManager : MonoBehaviour {
 	public int chosenInput = 0; //Input chosen by the player this turn
 	private bool isChoosing = false;
 	private bool gameIsOn = false;
+    private bool gameIsRunning = true;
 
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
 
+    const int PAUSE_TIMER = 10;
 
+
+    int timer = PAUSE_TIMER;
 
 	// Use this for initialization
 	void Awake() {
@@ -41,18 +45,35 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(gameIsOn) {
+            if(gameIsRunning)
+            {
 			timeLeft -= Time.deltaTime; //Timer
 			if(timeLeft <= 0) EndGame ();
+            }
 		} else {
 			if(Input.GetAxis("Start") > 0) StartGame ();
 		}
-
+        if (timer < PAUSE_TIMER)
+        {
+            timer++;
+        }
+        else{
+            if (Input.GetAxis("Start") > 0) Pause();
+            timer = 0;
+        }
+        
 		//Check for inputs if player can choose
 		if(isChoosing) {
 			CheckInputs();
 		}
 
 	}
+
+    void Pause() {
+
+        gameIsRunning = !gameIsRunning;
+    }
+
 
 	void CheckInputs(){
 		if(Input.GetAxis("Left") > 0) {
