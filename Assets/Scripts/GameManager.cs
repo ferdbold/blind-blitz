@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	//Inputs
 	public int chosenInput = 0; //Input chosen by the player this turn
 	private bool isChoosing = false;
+	private bool gameIsOn = false;
 
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
@@ -33,13 +34,19 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-		StartGame();
+
 	}
 	
 
 	// Update is called once per frame
 	void Update () {
-		timeLeft -= Time.deltaTime; //Timer
+		if(gameIsOn) {
+			timeLeft -= Time.deltaTime; //Timer
+			if(timeLeft <= 0) EndGame ();
+		} else {
+			if(Input.GetAxis("Start") > 0) StartGame ();
+		}
+
 		//Check for inputs if player can choose
 		if(isChoosing) {
 			CheckInputs();
@@ -125,10 +132,13 @@ public class GameManager : MonoBehaviour {
 			currentChoice.nextChoices[i] = (choiceType) Random.Range(0,amountOfInputOptions);
 		}
 		//Restart Coroutine
+		gameIsOn = true;
 		StartCoroutine("ChoiceTimer");
 	}
 
 	void EndGame() {
+		gameIsOn = false;
+		timeLeft = 0;
 		//StopCoroutine
 		StopCoroutine("ChoiceTimer");
 		//Remove controls
