@@ -9,13 +9,13 @@ public class Interface : MonoBehaviour {
 	public Image Background;
 
 	public Animator buttonWrapperAnimator;
+	public Animator[] buttonEffectsAnimators;
 
 	public Sprite[] InputSprites_Arrows; // up, right, down, left
 	public Sprite[] InputSprites_Triggers; // RT, LT, RJ, LJ
 	public Sprite[] InputSprites_ButtonsPS; // triangle, square, x, round
 	public Sprite[] InputSprites_ButtonsXbox; // Y,X,A,B
-
-
+	
 	private GameManager manager;
 
 	void Start () {
@@ -65,7 +65,6 @@ public class Interface : MonoBehaviour {
 	}
 
 	private void ChangeSecondaryChoice(choiceType[] secChoices){ //Changes color of incoming input
-
 		for(int i=0; i<secOptions.Length; i++){
 			switch (secChoices[i]) {
 				case choiceType.arrows:
@@ -78,6 +77,22 @@ public class Interface : MonoBehaviour {
 				secOptions[i].sprite = InputSprites_Triggers[4];
 					break;
 			}
+		}
+	}
+
+	public void OnSelectInput(int choice) {
+		buttonEffectsAnimators [choice].SetTrigger ("SelectInput");
+	}
+
+	public void OnReadyInput() {
+		foreach (Animator a in buttonEffectsAnimators) {
+			a.SetTrigger("ReadyInput");
+		}
+	}
+
+	public void OnError() {
+		foreach (Animator a in buttonEffectsAnimators) {
+			a.SetTrigger("Error");
 		}
 	}
 }
