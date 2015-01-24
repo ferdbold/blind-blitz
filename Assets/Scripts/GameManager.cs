@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour {
     private bool gameIsPaused = false;
     private bool pauseIsPressed = false;
 
+	//Rumble
+	private float timeUntilLightRumble; //Time until controller starts to vibrate and player can make a choice
+	private float timeUntilLightRumble_MIN = 5;
+	private float timeUntilLightRumble_MAX = 8;
+	private float timeUntilHeavyRumble = 2; //Time until controller starts to vibrate heavily and player is losing time until he makes a choice
+	private bool isLightRumbling = false; //Is it Light Rumbling ?
+	private bool isHeavyRumbling = false; //Is it Heavy Rumbling ?
+
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
     private int malusTemps = 1;
@@ -56,18 +64,6 @@ public class GameManager : MonoBehaviour {
     void Update()
     {
         if (gameIsOn) {
-            //if (gameIsRunning)
-            //{
-            //    timeLeft -= (Time.deltaTime * malusTemps); //Timer
-            //    if (timeLeft <= 0) EndGame();
-            //}
-            //if (!pauseIsPressed)
-            //{
-            //    if (Input.GetAxis("Start") > 0) Pause();
-            //}
-
-            //if (Input.GetAxis("Start") == 0) pauseIsPressed = false;
-
             if(gameIsPaused) {
             	if (Input.GetAxis("Start") > 0 && !pauseIsPressed) Unpause();     
             }
@@ -84,11 +80,16 @@ public class GameManager : MonoBehaviour {
         if (Input.GetAxis("Start") <= 0.1f) {
 			pauseIsPressed = false;
 		}
-
-
 		Debug.Log ( pauseIsPressed);
 
 
+
+		//Rumble if needed :
+		if(isHeavyRumbling) {
+			//TODO : RUMBLE HEAVILY
+		} else if(isLightRumbling) {
+			//TODO : RUMBLE LIGHTLY
+		}
         //Check for inputs if player can choose
         if (isChoosing)
         {
@@ -228,7 +229,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void MakeNextChoice() {
-		currentChoice = CreatePlayerChoice(); //Make a new choice
+		//Reset Rumble Values
+		isHeavyRumbling = false;
+		isLightRumbling = false;
+		timeUntilLightRumble = Random.Range (timeUntilLightRumble_MIN,timeUntilLightRumble_MAX);
+		//Make a new choice
+		currentChoice = CreatePlayerChoice(); 
 		//Update Color
 		if(tickSinceLastChange >= tickToChangeColor) {
 			tickSinceLastChange = 1; //reset the amounts of ticks back to 1
@@ -254,8 +260,12 @@ public class GameManager : MonoBehaviour {
             MakeNextChoice();
             StartCoroutine(AnimateButtons()); //Animate it
             yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
-            isChoosing = true; //give back controls
-            yield return new WaitForSeconds(DELAY);
+            yield return new WaitForSeconds(timeUntilLightRumble);
+			isChoosing = true; //give back controls
+			isLightRumbling = true;
+			yield return new WaitForSeconds(timeUntilHeavyRumble);
+			isHeavyRumbling = true;
+			malusTemps = 2;
             //Go To Next Choice
             isChoosing = false;
         }
