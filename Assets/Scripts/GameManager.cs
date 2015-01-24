@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
 
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
-    private int malusTemps = 1;
+    private float malusTemps = 1;
     const int CHOICE_DELAY = 5;
 
 
@@ -107,19 +107,24 @@ public class GameManager : MonoBehaviour {
     
 
     void Pause() { /// TEMPORARY : REMOVED TIMESALE
-		Debug.Log ("Paused");
+		//Debug.Log ("Paused");
         gameIsPaused = true;
         pauseIsPressed = true;
         //Time.timeScale = 0;
     }
 
     void Unpause() {
-		Debug.Log ("UnPaused");
+		//Debug.Log ("UnPaused");
         gameIsPaused = false;
         pauseIsPressed = true;
         //Time.timeScale = 1;
         
     }
+
+	public bool isGameOn() {
+		if(gameIsOn) return true;
+		else return false;
+	}
 
 	private void LoadSounds(){ //Create a AudioSource and gets AudioClips in Resources.
 		audioSource = (AudioSource) gameObject.AddComponent<AudioSource>();
@@ -186,7 +191,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnInputError(AudioClip soundToPlay){
-		Debug.Log ("error");
+		//Debug.Log ("error");
 		PlaySound(soundToPlay); //play error Sound
 		myInterface.OnError();
 	}
@@ -284,7 +289,7 @@ public class GameManager : MonoBehaviour {
 			myInterface.OnReadyInput ();
 			yield return new WaitForSeconds(timeUntilHeavyRumble);
 			isHeavyRumbling = true;
-			malusTemps = 2;
+			malusTemps = 2.5f;
 
             //Go To Next Choice
             //isChoosing = false;

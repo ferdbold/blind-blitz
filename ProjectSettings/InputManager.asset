@@ -76,7 +76,7 @@ InputManager:
     negativeButton: 
     positiveButton: w
     altNegativeButton: 
-    altPositiveButton: joystick button 3
+    altPositiveButton: joystick 2 button 3
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -92,7 +92,7 @@ InputManager:
     negativeButton: 
     positiveButton: a
     altNegativeButton: 
-    altPositiveButton: joystick button 0
+    altPositiveButton: joystick 2 button 0
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -124,7 +124,7 @@ InputManager:
     negativeButton: 
     positiveButton: d
     altNegativeButton: 
-    altPositiveButton: joystick button 2
+    altPositiveButton: joystick 2 button 2
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -140,7 +140,7 @@ InputManager:
     negativeButton: 
     positiveButton: u
     altNegativeButton: 
-    altPositiveButton: joystick button 6
+    altPositiveButton: joystick 2 button 6
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -156,7 +156,7 @@ InputManager:
     negativeButton: 
     positiveButton: o
     altNegativeButton: 
-    altPositiveButton: joystick button 7
+    altPositiveButton: joystick 2 button 7
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -172,7 +172,7 @@ InputManager:
     negativeButton: 
     positiveButton: j
     altNegativeButton: 
-    altPositiveButton: joystick button 10
+    altPositiveButton: joystick 2 button 10
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -188,7 +188,7 @@ InputManager:
     negativeButton: 
     positiveButton: l
     altNegativeButton: 
-    altPositiveButton: joystick button 11
+    altPositiveButton: joystick 2 button 11
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -204,7 +204,7 @@ InputManager:
     negativeButton: 
     positiveButton: space
     altNegativeButton: 
-    altPositiveButton: joystick button 9
+    altPositiveButton: joystick 2 button 9
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -212,7 +212,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 2
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Debug Right
     descriptiveName: 
