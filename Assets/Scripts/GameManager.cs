@@ -62,7 +62,8 @@ public class GameManager : MonoBehaviour {
 
 	void Start () {
   
-        GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+        
+
         
 	}
 	
@@ -95,9 +96,9 @@ public class GameManager : MonoBehaviour {
 
 		//Rumble if needed :
 		if(isHeavyRumbling) {
-			//TODO : RUMBLE HEAVILY
+			GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
 		} else if(isLightRumbling) {
-			//TODO : RUMBLE LIGHTLY
+			GamePad.SetVibration(PlayerIndex.One, 0.35f, 0.35f);
 		}
        
     }
@@ -246,6 +247,7 @@ public class GameManager : MonoBehaviour {
 		isLightRumbling = false;
 		timeUntilLightRumble = Random.Range (timeUntilLightRumble_MIN,timeUntilLightRumble_MAX);
 		malusTemps = 1;
+		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
 		//Make a new choice
 		currentChoice = CreatePlayerChoice(); 
 		//Update Color
