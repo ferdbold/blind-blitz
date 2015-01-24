@@ -12,11 +12,7 @@ public class Interface : MonoBehaviour {
 	public Sprite[] InputSprites_Triggers; // RT, LT, RJ, LJ
 	public Sprite[] InputSprites_ButtonsPS; // triangle, square, x, round
 	public Sprite[] InputSprites_ButtonsXbox; // Y,X,A,B
-	/*
-	 * 0-3: up, right, down, left
-	 * 4-7: triangle, square, x, round
-	 * 8-11: RT, LT, RJ, LJ
-	 * */
+
 
 	private GameManager manager;
 	
@@ -35,14 +31,13 @@ public class Interface : MonoBehaviour {
 	public void ChangeOptions(PlayerChoice p){
 		ChangeMainChoice (p.curChoice);
 		ChangeSecondaryChoice(p.nextChoices);
-		if(Random.Range(0,100) > 80) ChangeColor();
+
 	}
 
-	private void ChangeColor() {
-		int c = Random.Range (0,4);
-		if(c==0) Background.color = Color.red;
-		else if(c==1) Background.color = Color.yellow;
-		else if(c==2) Background.color = Color.green;
+	public void ChangeColor(int newColorIndex) {
+		if(newColorIndex==0) Background.color = Color.red;
+		else if(newColorIndex==1) Background.color = Color.yellow;
+		else if(newColorIndex==2) Background.color = Color.green;
 		else Background.color = Color.blue;
 	}
 
@@ -87,8 +82,8 @@ public class Interface : MonoBehaviour {
 	}
 
 
-
 	void OnGUI(){
-
+		
 	}
+
 }
