@@ -113,4 +113,18 @@ public class Interface : MonoBehaviour {
 			a.SetTrigger("Error");
 		}
 	}
+
+	public void OnPause() {
+		foreach(Animator b in buttonEffectsAnimators) {
+			b.speed = 0;
+		}
+		buttonWrapperAnimator.speed = 0;
+	}
+
+	public void OnUnpause() {
+		foreach(Animator b in buttonEffectsAnimators) {
+			b.speed = 1;
+		}
+		buttonWrapperAnimator.speed = 1;
+	}
 }
