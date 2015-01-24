@@ -20,7 +20,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 6
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Right
     descriptiveName: 
@@ -36,7 +36,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 6
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Up
     descriptiveName: 
@@ -52,7 +52,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 7
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Down
     descriptiveName: 
@@ -68,7 +68,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 7
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Triangle
     descriptiveName: 
@@ -84,7 +84,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Square
     descriptiveName: 
@@ -100,7 +100,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: X
     descriptiveName: 
@@ -116,7 +116,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Round
     descriptiveName: 
@@ -132,7 +132,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: LT
     descriptiveName: 
@@ -148,7 +148,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: RT
     descriptiveName: 
@@ -164,7 +164,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: LJ
     descriptiveName: 
@@ -180,7 +180,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: RJ
     descriptiveName: 
@@ -196,7 +196,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Start
     descriptiveName: 
@@ -212,23 +212,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: Debug Left
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: left
-    altNegativeButton: 
-    altPositiveButton: joystick button 9
-    gravity: 3
-    dead: .00100000005
-    sensitivity: 3
-    snap: 1
-    invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Debug Right
     descriptiveName: 
@@ -236,7 +220,7 @@ InputManager:
     negativeButton: 
     positiveButton: right
     altNegativeButton: 
-    altPositiveButton: joystick button 9
+    altPositiveButton: 
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -244,7 +228,23 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: Debug Left
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: left
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: .00100000005
+    sensitivity: 3
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Debug Up
     descriptiveName: 
@@ -252,7 +252,7 @@ InputManager:
     negativeButton: 
     positiveButton: up
     altNegativeButton: 
-    altPositiveButton: joystick button 9
+    altPositiveButton: 
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -260,7 +260,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Debug Down
     descriptiveName: 
@@ -268,7 +268,7 @@ InputManager:
     negativeButton: 
     positiveButton: down
     altNegativeButton: 
-    altPositiveButton: joystick button 9
+    altPositiveButton: 
     gravity: 3
     dead: .00100000005
     sensitivity: 3
@@ -276,4 +276,4 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 0
+    joyNum: 2

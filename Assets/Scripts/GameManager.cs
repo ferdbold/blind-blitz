@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using XInputDotNetPure;
+
 
 public enum choiceType {arrows,buttons,triggers};
 
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour {
 	public float timeLeft;
 	public float startTime = 60;
 
+    const float AUTO_SWITCH_DELAY = 10f;
 	public float animationTime = 0.5f;
     const float DELAY = 5f;
 
@@ -35,6 +38,7 @@ public class GameManager : MonoBehaviour {
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
     private int malusTemps = 1;
+    const int CHOICE_DELAY = 5;
 
 
 	private int amountOfColors = 4; //Amount of different colors
@@ -57,6 +61,14 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
+  
+        
+
+        
+	}
+
+	void OnApplicationQuit(){
+		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
 	}
 	
 
@@ -86,9 +98,9 @@ public class GameManager : MonoBehaviour {
 
 		//Rumble if needed :
 		if(isHeavyRumbling) {
-			//TODO : RUMBLE HEAVILY
+			GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
 		} else if(isLightRumbling) {
-			//TODO : RUMBLE LIGHTLY
+			GamePad.SetVibration(PlayerIndex.One, 0.35f, 0.35f);
 		}
        
     }
@@ -238,6 +250,7 @@ public class GameManager : MonoBehaviour {
 		isLightRumbling = false;
 		timeUntilLightRumble = Random.Range (timeUntilLightRumble_MIN,timeUntilLightRumble_MAX);
 		malusTemps = 1;
+		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
 		//Make a new choice
 		currentChoice = CreatePlayerChoice(); 
 		//Update Color
@@ -264,6 +277,7 @@ public class GameManager : MonoBehaviour {
             MakeNextChoice();
             StartCoroutine(AnimateButtons()); //Animate it
             yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
+
             yield return new WaitForSeconds(timeUntilLightRumble);
 			isChoosing = true; //give back controls
 			isLightRumbling = true;
