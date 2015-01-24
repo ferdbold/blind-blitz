@@ -31,6 +31,9 @@ public class Interface : MonoBehaviour {
         { pauseGUI.enabled = false; }
         else
         { pauseGUI.enabled = true; }
+        if(manager.gameOver)
+        { endGameGUI.enabled = true; }
+        else { endGameGUI.enabled = false; }
 
 	}
 
