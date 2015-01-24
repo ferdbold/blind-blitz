@@ -7,6 +7,13 @@ public class Interface : MonoBehaviour {
 	public Image[] options;
 	public Image[] secOptions;
 
+	public Sprite[] InputSprites; 
+	/*
+	 * 0-3: up, right, down, left
+	 * 4-7: triangle, square, x, round
+	 * 8-11: RT, LT, RJ, LJ
+	 * */
+
 	private GameManager manager;
 	
 	// Use this for initialization
