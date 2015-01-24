@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour {
 
 	void CheckInputs(){
 		if(Input.GetAxis("Left") > 0) {
+			Debug.Log ("Pressed Left");
 			if(currentChoice.curChoice == choiceType.arrows) ChooseInput(2);
 			//else PLAY ERROR SOUND 
 		}
@@ -66,18 +67,22 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if(Input.GetAxis("Triangle") > 0) {
+			Debug.Log ("Pressed Triangle");
 			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(1);
 			//else PLAY ERROR SOUND 
 		}
 		if(Input.GetAxis("Square") > 0) {
+			Debug.Log ("Pressed Square");
 			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(2);
 			//else PLAY ERROR SOUND 
 		}
 		if(Input.GetAxis("X") > 0) {
+			Debug.Log ("Pressed Cross");
 			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(4);
 			//else PLAY ERROR SOUND 
 		}
 		if(Input.GetAxis("Round") > 0) {
+			Debug.Log ("Pressed Circle");
 			if(currentChoice.curChoice == choiceType.buttons) ChooseInput(3);
 			//else PLAY ERROR SOUND 
 		}
