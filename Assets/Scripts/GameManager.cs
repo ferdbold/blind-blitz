@@ -236,6 +236,7 @@ public class GameManager : MonoBehaviour {
 
 	void EndGame() {
 		gameIsOn = false;
+        gameOver = true;
 		timeLeft = 0;
 		//StopCoroutine
 		StopCoroutine("ChoiceTimer");
