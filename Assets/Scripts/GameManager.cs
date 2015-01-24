@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour {
 
 	//Rumble
 	private float timeUntilLightRumble; //Time until controller starts to vibrate and player can make a choice
-	private float timeUntilLightRumble_MIN = 5;
-	private float timeUntilLightRumble_MAX = 8;
+	public float timeUntilLightRumble_MIN = 2;
+	public float timeUntilLightRumble_MAX = 5;
 	private float timeUntilHeavyRumble = 2; //Time until controller starts to vibrate heavily and player is losing time until he makes a choice
 	private bool isLightRumbling = false; //Is it Light Rumbling ?
 	private bool isHeavyRumbling = false; //Is it Heavy Rumbling ?
@@ -119,20 +119,20 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void CheckInputs(){
-		if(Input.GetAxis("Left") > 0) {
+		if(Input.GetAxis("Left") > 0 || Input.GetAxis ("Debug Left") > 0) {
 			Debug.Log ("Pressed Left");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(2);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Right") > 0) {
+		if(Input.GetAxis("Right") > 0 || Input.GetAxis ("Debug Right") > 0) {
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(3);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Up") > 0) {
+		if(Input.GetAxis("Up") > 0 || Input.GetAxis ("Debug Up") > 0) {
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(1);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Down") > 0) {
+		if(Input.GetAxis("Down") > 0 || Input.GetAxis ("Debug Down") > 0) {
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(4);
 			else OnInputError(myAudioClips[0]); 
 		}
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour {
 
 	void OnInputError(AudioClip soundToPlay){
 		PlaySound(soundToPlay); //play error Sound
-		//myInterface.OnError();
+		myInterface.OnError();
 	}
 
 	void PlaySound(AudioClip soundToPlay){
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour {
 		StopCoroutine("ChoiceTimer");
 		StartCoroutine("ChoiceTimer");
 		//Send Event to Interface
-		//MyInterface.OnSelectInput(chosenInput);
+		myInterface.OnSelectInput(chosenInput);
 	}
 
 	void StartGame() {
@@ -269,6 +269,7 @@ public class GameManager : MonoBehaviour {
             yield return new WaitForSeconds(timeUntilLightRumble);
 			isChoosing = true; //give back controls
 			isLightRumbling = true;
+			myInterface.OnReadyInput ();
 			yield return new WaitForSeconds(timeUntilHeavyRumble);
 			isHeavyRumbling = true;
 			malusTemps = 2;
