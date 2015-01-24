@@ -66,6 +66,10 @@ public class GameManager : MonoBehaviour {
 
         
 	}
+
+	void OnApplicationQuit(){
+		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+	}
 	
 
 	// Update is called once per frame
