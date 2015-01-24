@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour {
         if (Input.GetAxis("Start") <= 0.1f) {
 			pauseIsPressed = false;
 		}
-		Debug.Log ( pauseIsPressed);
 
 
 
