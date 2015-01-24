@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour {
 	private int amountOfChoices = 4; //Amount of different choices available each turn
 	private int amountOfInputOptions = 3; //Arrows, Buttons and Triggers
 
-
+	private int amountOfColors = 4; //Amount of different colors
+	private int currentColor = -1; //current color, we start with -1 which is none
+	private int tickSinceLastChange = 0; //amount of ticks since last change we had. When this reaches tickToChangeColor, Change Color
+	public int tickToChangeColor = 3; //Change color every X Tick
 
 	// Use this for initialization
 	void Awake() {
@@ -115,8 +118,7 @@ public class GameManager : MonoBehaviour {
 	void ChooseInput(int newInput) {
 		chosenInput = newInput-1; //Adjust to correspond to table index
 		isChoosing = false;
-		Debug.Log ("Chosen Input : " + chosenInput + "    Current Choice : " + currentChoice.curChoice + "    Next Choice : " + currentChoice.nextChoices[chosenInput]);
-		//TODO : Change this so it plays the animation 
+		//Debug.Log ("Chosen Input : " + chosenInput + "    Current Choice : " + currentChoice.curChoice + "    Next Choice : " + currentChoice.nextChoices[chosenInput]); 
 		StopCoroutine("ChoiceTimer");
 		StartCoroutine("ChoiceTimer");
 	}
@@ -127,8 +129,8 @@ public class GameManager : MonoBehaviour {
 		//Create the first choice at random
 		currentChoice = new PlayerChoice();		
 		currentChoice.curChoice = (choiceType) Random.Range(0,amountOfInputOptions);
-		currentChoice.nextChoices = new choiceType[4];
-		for(int i=0; i<3 ; i++){
+		currentChoice.nextChoices = new choiceType[amountOfChoices];
+		for(int i=0; i<amountOfChoices ; i++){
 			currentChoice.nextChoices[i] = (choiceType) Random.Range(0,amountOfInputOptions);
 		}
 		//Restart Coroutine
@@ -148,18 +150,41 @@ public class GameManager : MonoBehaviour {
 	PlayerChoice CreatePlayerChoice(){
 		PlayerChoice myNewChoice = new PlayerChoice();
 		myNewChoice.curChoice = currentChoice.nextChoices[chosenInput];
-		myNewChoice.nextChoices = new choiceType[4];
-		for(int i=0; i<3 ; i++){
+		myNewChoice.nextChoices = new choiceType[amountOfChoices];
+		for(int i=0; i<amountOfChoices ; i++){
 			myNewChoice.nextChoices[i] = (choiceType) Random.Range(0,amountOfInputOptions);
 		}
 		return myNewChoice;
 
 	}
 
+	void MakeNextChoice() {
+		currentChoice = CreatePlayerChoice(); //Make a new choice
+		//Update Color
+		if(tickSinceLastChange >= tickToChangeColor) {
+			tickSinceLastChange = 1; //reset the amounts of ticks back to 1
+			currentColor = GetNewColorIndex();
+			myInterface.ChangeColor(currentColor);
+		} 
+		else tickSinceLastChange++;
+	}
+
+	private int GetNewColorIndex(){
+		int newColor;
+
+		do {
+			newColor = Random.Range (0,amountOfColors);
+		} while(newColor == currentColor);
+
+		return newColor;
+	}
+
+
+
 	IEnumerator ChoiceTimer() {
 		while(true) {
-			currentChoice = CreatePlayerChoice();
-			StartCoroutine(AnimateButtons());
+			MakeNextChoice();
+			StartCoroutine(AnimateButtons()); //Animate it
 			yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
 			isChoosing = true; //give back controls
 			yield return new WaitForSeconds(15f);
