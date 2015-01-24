@@ -126,6 +126,9 @@ public class GameManager : MonoBehaviour {
 		if(gameIsOn) return true;
 		else return false;
 	}
+	public bool Get_RumblingHard(){
+		return isHeavyRumbling;
+	}
 
 	private void LoadSounds(){ //Create a AudioSource and gets AudioClips in Resources.
 		audioSource = (AudioSource) gameObject.AddComponent<AudioSource>();
