@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
 	public float animationTime = 0.5f;
     const float DELAY = 5f;
 
+	private bool[] dPadPressed = new bool[4];
+
 	//Inputs
 	public int chosenInput = 0; //Input chosen by the player this turn
 	private bool isChoosing = false;
@@ -61,10 +63,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-  
-        
-
-        
 	}
 
 	void OnApplicationQuit(){
@@ -127,24 +125,63 @@ public class GameManager : MonoBehaviour {
 		myAudioClips.Add((AudioClip) Resources.Load("Sounds/Sound_Error"));
 	}
 
-	void CheckInputs(){
-		if(Input.GetAxis("Left") > 0 || Input.GetButtonDown("Debug Left")) {
+	private void CheckDPadInputs() {
+		if (Input.GetAxis ("Up") == 0) {
+			dPadPressed [0] = false;
+		} else if (Input.GetAxis ("Left") == 0) {
+			dPadPressed [1] = false;
+		} else if (Input.GetAxis ("Right") == 0) {
+			dPadPressed [2] = false;
+		} else if (Input.GetAxis ("Down") == 0) {
+			dPadPressed [3] = false;
+		}
+
+		if(GetAxisDown("Left") || Input.GetButtonDown("Debug Left")) {
 			Debug.Log ("Pressed Left");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(2);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Right") > 0 || Input.GetButtonDown("Debug Right")) {
+		if(GetAxisDown("Right") || Input.GetButtonDown("Debug Right")) {
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(3);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Up") > 0 || Input.GetButtonDown("Debug Up")) {
+		if(GetAxisDown("Up") || Input.GetButtonDown("Debug Up")) {
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(1);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Down") > 0 || Input.GetButtonDown("Debug Down")) {
+		if(GetAxisDown("Down") || Input.GetButtonDown("Debug Down")) {
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(4);
 			else OnInputError(myAudioClips[0]); 
 		}
+	}
+
+	private bool GetAxisDown(string axisName) {
+		int idButton = 0;
+		switch (axisName) {
+			case "Up":
+					idButton = 0;
+					break;
+			case "Left":
+					idButton = 1;
+					break;
+			case "Right":
+					idButton = 2;
+					break;
+			case "Down":
+					idButton = 3;
+					break;
+		}
+
+		if (Input.GetAxis (axisName) > 0 && !dPadPressed [idButton]) {
+			dPadPressed[idButton] = true;
+			return true;
+		}
+
+		return false;
+	}
+
+	void CheckInputs(){
+		CheckDPadInputs ();
 
 		if(Input.GetButtonDown("Triangle")) {
 			Debug.Log ("Pressed Triangle");
