@@ -97,10 +97,12 @@ public class GameManager : MonoBehaviour {
         }
 
 		//Rumble if needed :
-		if(isHeavyRumbling) {
-			GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
-		} else if(isLightRumbling) {
-			GamePad.SetVibration(PlayerIndex.One, 0.35f, 0.35f);
+		if(!gameIsPaused) {
+			if(isHeavyRumbling) {
+				GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+			} else if(isLightRumbling) {
+				GamePad.SetVibration(PlayerIndex.One, 0.35f, 0.35f);
+			}
 		}
        
     }
@@ -112,14 +114,21 @@ public class GameManager : MonoBehaviour {
         pauseIsPressed = true;
 
         Debug.Log("game is paused");
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
+
+		//Remove Rumble 
+		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
     }
 
     void Unpause() {
 
         gameIsPaused = false;
         pauseIsPressed = true;
-        //Time.timeScale = 1;
+        Time.timeScale = 1;
+
+		//Resume Rumble
+		if(isLightRumbling) GamePad.SetVibration(PlayerIndex.One, 0.35f, .35f);
+		else if(isHeavyRumbling) GamePad.SetVibration(PlayerIndex.One, 1f, 1f);
         
     }
 
