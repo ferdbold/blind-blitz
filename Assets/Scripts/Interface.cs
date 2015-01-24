@@ -8,6 +8,8 @@ public class Interface : MonoBehaviour {
 	public Image[] secOptions;
 	public Image Background;
 
+	public Animator buttonWrapperAnimator;
+
 	public Sprite[] InputSprites_Arrows; // up, right, down, left
 	public Sprite[] InputSprites_Triggers; // RT, LT, RJ, LJ
 	public Sprite[] InputSprites_ButtonsPS; // triangle, square, x, round
@@ -28,7 +30,6 @@ public class Interface : MonoBehaviour {
 	public void ChangeOptions(PlayerChoice p){
 		ChangeMainChoice (p.curChoice);
 		ChangeSecondaryChoice(p.nextChoices);
-
 	}
 
 	public void ChangeColor(int newColorIndex) {
@@ -41,19 +42,21 @@ public class Interface : MonoBehaviour {
 	private void ChangeMainChoice(choiceType mainChoice){ //Changes main color of choice
 		switch (mainChoice) {
 		case choiceType.arrows:
+			buttonWrapperAnimator.SetBool("IsCrossLayout", true);
 			for(int i=0; i<options.Length; i++) {
 				options[i].sprite = InputSprites_Arrows[i];
 			}
 			break;
 		case choiceType.buttons:
+			buttonWrapperAnimator.SetBool("IsCrossLayout", true);
 			for(int i=0; i<options.Length; i++) {
 				options[i].sprite = InputSprites_ButtonsPS[i];
 				//TODO : If Xbox Controller, Do
 				//options[i].sprite = InputSprites_ButtonsXbox[i]
-
 			}
 			break;
 		case choiceType.triggers:
+			buttonWrapperAnimator.SetBool("IsCrossLayout", false);
 			for(int i=0; i<options.Length; i++) {
 				options[i].sprite = InputSprites_Triggers[i];
 			}
@@ -66,21 +69,15 @@ public class Interface : MonoBehaviour {
 		for(int i=0; i<secOptions.Length; i++){
 			switch (secChoices[i]) {
 				case choiceType.arrows:
-					secOptions[i].sprite = InputSprites_Arrows[0];
+					secOptions[i].sprite = InputSprites_Arrows[4];
 					break;
 				case choiceType.buttons:
-					secOptions[i].sprite = InputSprites_ButtonsPS[0];
+					secOptions[i].sprite = InputSprites_ButtonsPS[4];
 					break;
 				case choiceType.triggers:
-				secOptions[i].sprite = InputSprites_Triggers[0];
+				secOptions[i].sprite = InputSprites_Triggers[4];
 					break;
 			}
 		}
 	}
-
-
-	void OnGUI(){
-		
-	}
-
 }
