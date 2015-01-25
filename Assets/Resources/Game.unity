@@ -195,9 +195,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myInterface: {fileID: 1314649144}
+  myInputScreen: {fileID: 1723533044}
   timeLeft: 0
   startTime: 60
-  animationTime: .600000024
+  animationTime: 1.5
   isFirstInput: 1
   chosenInput: 0
   gameIsOn: 0
@@ -940,7 +941,7 @@ GameObject:
   - 222: {fileID: 278945819}
   - 114: {fileID: 278945818}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image RightTrig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1374,7 +1375,7 @@ GameObject:
   - 222: {fileID: 363989988}
   - 114: {fileID: 363989987}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image RIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1931,7 +1932,7 @@ GameObject:
   - 222: {fileID: 543543582}
   - 114: {fileID: 543543581}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image LeftJoy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3862,7 +3863,7 @@ GameObject:
   - 222: {fileID: 1160696348}
   - 114: {fileID: 1160696347}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image LeftTrig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4279,7 +4280,7 @@ GameObject:
   - 222: {fileID: 1216059558}
   - 114: {fileID: 1216059557}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image LEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4636,7 +4637,7 @@ GameObject:
   - 222: {fileID: 1270794175}
   - 114: {fileID: 1270794174}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image DOWN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4782,7 +4783,7 @@ GameObject:
   - 222: {fileID: 1286077365}
   - 114: {fileID: 1286077364}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image UP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6477,6 +6478,7 @@ GameObject:
   - 222: {fileID: 1723533042}
   - 114: {fileID: 1723533041}
   - 225: {fileID: 1723533043}
+  - 114: {fileID: 1723533044}
   m_Layer: 0
   m_Name: End Game Wrapper
   m_TagString: Untagged
@@ -6545,6 +6547,66 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1723533044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1723533039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d176910d8fda44c85275c6dafa8afb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonSprites:
+  - {fileID: 1270794174}
+  - {fileID: 1216059557}
+  - {fileID: 363989987}
+  - {fileID: 1286077364}
+  - {fileID: 602509496}
+  - {fileID: 1385255512}
+  - {fileID: 517414994}
+  - {fileID: 572112785}
+  - {fileID: 1160696347}
+  - {fileID: 543543581}
+  - {fileID: 278945818}
+  - {fileID: 2141864006}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1764403859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6886,12 +6948,16 @@ Prefab:
       objectReference: {fileID: 1314649144}
     - target: {fileID: 11413588, guid: 2a2fa6db0d1dc7945a4e28079765e08c, type: 2}
       propertyPath: animationTime
-      value: .600000024
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 11413588, guid: 2a2fa6db0d1dc7945a4e28079765e08c, type: 2}
       propertyPath: Music
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11413588, guid: 2a2fa6db0d1dc7945a4e28079765e08c, type: 2}
+      propertyPath: myInputScreen
+      value: 
+      objectReference: {fileID: 1723533044}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a2fa6db0d1dc7945a4e28079765e08c, type: 2}
   m_RootGameObject: {fileID: 79124292}
@@ -7800,7 +7866,7 @@ GameObject:
   - 222: {fileID: 2141864007}
   - 114: {fileID: 2141864006}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image RightJoy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
