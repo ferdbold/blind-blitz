@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("game is paused");
         Time.timeScale = 0;
 
-		//Remove Rumble 
+		//Remove Rumble
 		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
 
 		myInterface.OnPause ();
@@ -280,10 +280,10 @@ public class GameManager : MonoBehaviour {
 	void ChooseInput(int newInput) {
 		chosenInput = newInput-1; //Adjust to correspond to table index
 		//Restart The coroutine that manages Choices and Input
-		StopCoroutine("ChoiceTimer");
-		StartCoroutine("ChoiceTimer");
+		StopCoroutine ("ChoiceTimer");
 		//Send Event to Interface
 		myInterface.OnSelectInput(chosenInput);
+		StartCoroutine ("ChoiceTimer");
 	}
 
 	void StartGame() {
@@ -384,15 +384,21 @@ public class GameManager : MonoBehaviour {
 		List<Image> myImages = new List<Image>();
 		foreach(Image image in myInterface.options) myImages.Add(image);
 		foreach(Image image in myInterface.secOptions) myImages.Add(image);
+
+		//Wait for highlight
+		for(float i = 1; i > 0; i -= Time.deltaTime/(animationTime/3)){
+			yield return null;
+		}
+
 		//Add Transparency
-		for(float i = 1; i > 0; i -= Time.deltaTime/(animationTime/2)){
+		for(float i = 1; i > 0; i -= Time.deltaTime/(animationTime/3)){
 			foreach(Image image in myImages) image.color = new Color(1,1,1,i);
 			yield return null;
 		}
 		//Update Interface
 		myInterface.ChangeOptions(currentChoice); 
 		//Remove Transparency
-		for(float i = 0; i < 1; i += Time.deltaTime/(animationTime/2)){
+		for(float i = 0; i < 1; i += Time.deltaTime/(animationTime/3)){
 			foreach(Image image in myImages) image.color = new Color(1,1,1,i);
 			yield return null;
 		}

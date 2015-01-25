@@ -132,7 +132,7 @@ MonoBehaviour:
   myInterface: {fileID: 1314649144}
   timeLeft: 0
   startTime: 60
-  animationTime: .400000006
+  animationTime: .600000024
   chosenInput: 0
   gameIsPaused: 0
   gameOver: 0
@@ -1742,6 +1742,10 @@ Prefab:
       propertyPath: myInterface
       value: 
       objectReference: {fileID: 1314649144}
+    - target: {fileID: 11413588, guid: 2a2fa6db0d1dc7945a4e28079765e08c, type: 2}
+      propertyPath: animationTime
+      value: .600000024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a2fa6db0d1dc7945a4e28079765e08c, type: 2}
   m_RootGameObject: {fileID: 79124292}
