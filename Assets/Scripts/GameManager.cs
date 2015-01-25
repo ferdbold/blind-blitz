@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour {
 	public PlayerChoice currentChoice;
 	public Interface myInterface;
 
+    int cptAffichageMenu = 0;
+    const int NOMBRE_MENUS = 4;
+
 	public float timeLeft;
 	public float startTime = 100;
 
