@@ -7816,24 +7816,30 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 8
-    m_MaxSize: 16
-    m_Alignment: 4
+    m_MaxSize: 20
+    m_Alignment: 3
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "One player (the main player) takes the controller and faces AWAY from the
-    screen.\nEVERYONE ELSE (the spectators) draws a card and don't look at it. Instead,
-    they put it on their forehead so that everyone else can see it.\n\nThe main player
-    has to eliminate as many players as he can within the time limit.\nThe spectators
-    have to stay alive for as many rounds as possible.\n\nThe screen will prompt to
-    you four buttons (either the arrows, shapes or triggers). Each button also has
-    a secondary icon indicated which button type will come next if this button is
-    picked. Also, the background color will change over time at random.\n\nWhen the
-    main player inputs a button, if both that button and the current background color
-    matches someone's card, this person is ELIMINATED. \n\nConvince the main player
-    to press buttons that will eliminate others, \nhe is supposed to ask YOU what
-    to do next!"
+    screen.\nEVERYONE ELSE (the spectators) draw a card without looking at it. Instead,
+    they hold it on their forehead so that everyone else can see it.\n\nThe main player
+    has to eliminate as many players as he can within the time limit of a round. The
+    spectators have to stay alive for as many rounds as possible.\n\nThe screen will
+    prompt to you four buttons (either the arrows, shapes or triggers). Each button
+    also has a secondary icon indicating which button type will come next if this
+    button is picked. Also, the background color will change to another color after
+    every input.\n\nThe Mainplayer will be able to press a button succesfully only
+    when his controller is vibrating. Beware, if you wait for too long, your time
+    will count down way faster!\n\nWhen the main player inputs a button, if both that
+    button and the current background color matches someone's card, this person is
+    ELIMINATED. After a game round, all combinations that were pressed by the Mainplayer
+    will be displayed again.\n\nConvince the main player to press buttons that will
+    eliminate others, \nhe is supposed to ask YOU what to do next!\n\nAfter a round,
+    every player that was not eliminated and the Mainplayer gain 1 point for every
+    other player that was eliminated. The game goes on until everyone has been the
+    Mainplayer, then the player with the mosts point is the winner!"
 --- !u!222 &2120749075
 CanvasRenderer:
   m_ObjectHideFlags: 0
