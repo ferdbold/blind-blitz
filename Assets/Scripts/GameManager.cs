@@ -177,7 +177,9 @@ public class GameManager : MonoBehaviour {
 		audioSource = (AudioSource) gameObject.AddComponent<AudioSource>();
 		myAudioClips = new List<AudioClip>();
 		myAudioClips.Add((AudioClip) Resources.Load("Sounds/Sound_Error"));
-        myAudioClips.Add((AudioClip) Resources.Load("SoundS/Confirmed"));
+		myAudioClips.Add((AudioClip) Resources.Load("SoundS/Confirmed_v1"));
+        myAudioClips.Add((AudioClip) Resources.Load("SoundS/Confirmed_v2"));
+		myAudioClips.Add((AudioClip) Resources.Load("Sounds/EndRound"));
 	}
 
 	private void CheckDPadInputs() {
@@ -196,11 +198,7 @@ public class GameManager : MonoBehaviour {
 
 		if(GetAxisDown("Left") || Input.GetButtonDown("Debug Left")) {
 			Debug.Log ("Pressed Left");
-            if (currentChoice.curChoice == choiceType.arrows && isLightRumbling) 
-            {
-                ChooseInput(2);
-                PlaySound(myAudioClips[1]);
-            }
+            if (currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(2);
             else OnInputError(myAudioClips[0]); 
 		}
 		if(GetAxisDown("Right") || Input.GetButtonDown("Debug Right")) {
@@ -300,11 +298,12 @@ public class GameManager : MonoBehaviour {
 	void PlaySound(AudioClip soundToPlay){
 		if(canPlaySound) {
 			audioSource.PlayOneShot(soundToPlay);
-			StartCoroutine (SoundCooldown());
+			//StartCoroutine (SoundCooldown());
 		}
 	}
 
 	void ChooseInput(int newInput) {
+		PlaySound (myAudioClips[1]); //Plays Confirm Sound
 		chosenInput = newInput-1; //Adjust to correspond to table index
 		//Restart The coroutine that manages Choices and Input
 		StopCoroutine ("ChoiceTimer");
@@ -336,6 +335,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void EndGame() {
+		PlaySound (myAudioClips[3]);//Play End Sound
 		gameIsOn = false;
         gameOver = true;
 		timeLeft = 0;
