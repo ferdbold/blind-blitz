@@ -76,12 +76,18 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnApplicationQuit(){
+		Debug.Log ("sdad");
 		RumbleController(0);
 	}
 
 	// Update is called once per frame
     void Update()
     {
+		//Check Quit Game 
+		if((Input.GetButtonDown("share") && Input.GetButton("Start")) || (Input.GetButton("share") && Input.GetButtonDown("Start"))) {
+			Application.Quit();
+		}
+
         if (gameIsOn)
         {
             if (gameIsPaused)
