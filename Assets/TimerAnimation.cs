@@ -32,9 +32,9 @@ public class TimerAnimation : MonoBehaviour {
 
 	IEnumerator PopTimer(){ //calls the Scale Coroutine in order to make the timer pop each second.
 		if(manager.Get_RumblingHard()){
-			StartCoroutine(ScaleTimeText(1,Size_Rumbling,0.2f));
+			StartCoroutine(ScaleTimeText(1,Size_Rumbling,0.15f));
 			yield return null;
-			StartCoroutine(ScaleTimeText(Size_Rumbling,1.0f,0.2f));
+			StartCoroutine(ScaleTimeText(Size_Rumbling,1.0f,0.15f));
 		} else {
 			StartCoroutine(ScaleTimeText(1,Size_Standard,0.2f));
 			yield return null;

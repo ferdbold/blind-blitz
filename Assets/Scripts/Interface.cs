@@ -10,6 +10,7 @@ public class Interface : MonoBehaviour {
 	public Image[] options;
 	public Image[] secOptions;
 	public Image Background;
+	public Text LastSelectionText;
 
 	public Animator buttonWrapperAnimator;
 	public Animator[] buttonEffectsAnimators;
@@ -102,6 +103,48 @@ public class Interface : MonoBehaviour {
 
 			b.SetBool ("ReadyInput", false);
 		}
+
+		//Change Selection Text
+		ChangeLastSelectionText(manager.Get_CurrentColor(), choice, manager.previousChoice.curChoice);
+	}
+
+	private void ChangeLastSelectionText(int color, int choice, choiceType type){
+		string choiceString;
+		string typeString;
+		string colorString;
+
+		//Get Color String
+		if(color==0) colorString = "Red ";
+		else if(color==1) colorString = "Yellow ";
+		else if(color==2)  colorString = "Green ";
+		else  colorString = "Blue ";
+
+		//Get Choice String and Type
+		switch(type) {
+			case choiceType.arrows: //up left right down
+				if(choice == 0) choiceString = "Up ";
+				else if(choice == 1) choiceString = "Left ";
+				else if(choice == 2) choiceString = "Right ";
+				else choiceString = "Down ";
+				typeString = "Arrow ";
+				break;
+			case choiceType.buttons: //triangle, square, circle, x
+				if(choice == 0) choiceString = "Triangle ";
+				else if(choice == 1) choiceString = "Square ";
+				else if(choice == 2) choiceString = "Circle ";
+				else choiceString = "Cross ";
+				typeString = "Button ";
+				break;
+			default: //lt, ls, rt, rs
+				if(choice == 0) choiceString = "Left Trigger ";
+				else if(choice == 1) choiceString = "Left Joystick ";
+				else if(choice == 2) choiceString = "Right Trigger ";
+				else choiceString = "Right Joystick ";
+				typeString = " ";
+				break;
+		}
+
+		LastSelectionText.text = "Last Selection : " + colorString + choiceString + typeString;
 	}
 
 	public void OnReadyInput() {

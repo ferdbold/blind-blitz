@@ -12,6 +12,7 @@ public enum choiceType {arrows,buttons,triggers};
 
 public class GameManager : MonoBehaviour {
 
+	[HideInInspector] public PlayerChoice previousChoice;
 	public PlayerChoice currentChoice;
 	public Interface myInterface;
 
@@ -149,6 +150,9 @@ public class GameManager : MonoBehaviour {
 	}
 	public bool Get_RumblingHard(){
 		return isHeavyRumbling;
+	}
+	public int Get_CurrentColor(){
+		return currentColor;
 	}
 
 	private void LoadSounds(){ //Create a AudioSource and gets AudioClips in Resources.
@@ -307,6 +311,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	PlayerChoice CreatePlayerChoice(){
+
 		PlayerChoice myNewChoice = new PlayerChoice();
 		myNewChoice.curChoice = currentChoice.nextChoices[chosenInput];
 		myNewChoice.nextChoices = new choiceType[amountOfChoices];
@@ -332,6 +337,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		//Make a new choice
+		previousChoice = currentChoice;
 		currentChoice = CreatePlayerChoice(); 
 		//Update Color
 		if(tickSinceLastChange >= tickToChangeColor) {
@@ -363,7 +369,7 @@ public class GameManager : MonoBehaviour {
 			myInterface.OnReadyInput ();
 			yield return new WaitForSeconds(timeUntilHeavyRumble);
 			isHeavyRumbling = true;
-			malusTemps = 2.5f;
+			malusTemps = 3f;
 
             //Go To Next Choice
             //isChoosing = false;
