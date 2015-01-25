@@ -52,7 +52,8 @@ public class InputScreen : MonoBehaviour {
 	}
 
 	private void  ActivateButton(int index, bool isActive){
-		ButtonSprites[index].color = new Color(0,0,0,0.2f);
+		if(isActive) ButtonSprites[index].color = new Color(1,1,1,1f);
+		else ButtonSprites[index].color = new Color(1,1,1,0.2f);
 	}
 
 
