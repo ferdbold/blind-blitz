@@ -357,6 +357,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void StartGame() {
+		myInputScreen.ResetInputTable();
 		// Close menu
 		myInterface.CloseMenu ();
 		myInterface.CloseEndGameMenu ();

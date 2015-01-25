@@ -35,8 +35,8 @@ public class InputScreen : MonoBehaviour {
 	}
 
 	public void ResetInputTable() {
-		for(int i=0; i<InputTable.Length; i++) {
-			for(int j=0; i<InputTable.Length; i++) {
+		for(int i=0; i<4; i++) {
+			for(int j=0; j<12; j++) {
 				InputTable[i,j] = false;
 			}
 		}
