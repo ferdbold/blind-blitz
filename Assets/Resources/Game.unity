@@ -141,6 +141,7 @@ MonoBehaviour:
   timeUntilLightRumble_MIN: 2
   timeUntilLightRumble_MAX: 4
   tickToChangeColor: 3
+  ColorPool: 
   myAudioClips: []
 --- !u!4 &79124294
 Transform:
