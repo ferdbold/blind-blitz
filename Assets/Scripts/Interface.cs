@@ -46,10 +46,10 @@ public class Interface : MonoBehaviour {
 	}
 
 	public void ChangeColor(int newColorIndex) {
-		if(newColorIndex==0) Background.color = Color.red;
-		else if(newColorIndex==1) Background.color = Color.yellow;
-		else if(newColorIndex==2) Background.color = Color.green;
-		else Background.color = Color.blue;
+		if(newColorIndex==0) Background.color = new Color(204f/255f,51f/255f,63f/255f);
+		else if(newColorIndex==1) Background.color = new Color(237f/255f,201f/255f,81f/255f);
+		else if(newColorIndex==2) Background.color = new Color(235f/255f,104f/255f,65f/255f);
+		else Background.color = new Color(0f/255f,160f/255f,176f/255f);
 	}
 
 	private void ChangeMainChoice(choiceType mainChoice){ //Changes main color of choice
@@ -116,7 +116,7 @@ public class Interface : MonoBehaviour {
 		//Get Color String
 		if(color==0) colorString = "Red ";
 		else if(color==1) colorString = "Yellow ";
-		else if(color==2)  colorString = "Green ";
+		else if(color==2)  colorString = "Orange ";
 		else  colorString = "Blue ";
 
 		//Get Choice String and Type
