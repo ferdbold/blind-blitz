@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour {
     private float malusTemps = 1;
     const int CHOICE_DELAY = 5;
 
-
 	//Colors
 	[HideInInspector] public int previousColor;
 	private int currentColor = -1; //current color, we start with -1 which is none
@@ -76,7 +75,6 @@ public class GameManager : MonoBehaviour {
 	void OnApplicationQuit(){
 		RumbleController(0);
 	}
-	
 
 	// Update is called once per frame
     void Update()
@@ -120,7 +118,6 @@ public class GameManager : MonoBehaviour {
    	 	}
 	}
     
-
     void Pause() {
 		//Debug.Log ("Paused");
         gameIsPaused = true;
