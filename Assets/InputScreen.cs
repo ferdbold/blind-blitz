@@ -55,7 +55,6 @@ public class InputScreen : MonoBehaviour {
 
 			if(isActive) ButtonSprites[index].color = new Color(1,1,1,1f);
 			else ButtonSprites[index].color = new Color(1,1,1,0.2f);
-		
 
 	}
 
