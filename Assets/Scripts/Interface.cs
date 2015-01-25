@@ -7,7 +7,11 @@ public class Interface : MonoBehaviour {
     public Text pauseGUI;
     public Text endGameGUI;
     public Text startGUI;
-    public Text txtTutorial;
+
+	public CanvasGroup mainMenu;
+	public CanvasGroup menuMainScreen;
+    public CanvasGroup tutorialScreen;
+
 	public Image[] options;
 	public Image[] secOptions;
 	public Image Background;
@@ -24,32 +28,52 @@ public class Interface : MonoBehaviour {
 	
 	private GameManager manager;
 
+
+
 	void Start () {
 		manager = (GameManager) GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        txtTutorial.enabled = false;
+
+		OpenMenu ();
 	}
 
 	void Update () {
 		//Timer
         if(manager.gameIsOn)
         { bgMenu.enabled = false; }
+
 		timerGUI.text = manager.timeLeft.ToString("F2");
+
         if(!manager.gameIsPaused)
         { pauseGUI.enabled = false; }
         else
         { pauseGUI.enabled = true; }
+
         if(manager.gameOver)
         { endGameGUI.enabled = true; }
         else { endGameGUI.enabled = false; }
-        if (manager.gameIsOn) { 
+
+        /*if (manager.gameIsOn) { 
             startGUI.enabled = false;
             txtTutorial.enabled = false;
         }
         else { txtTutorial.enabled = manager.tutorial; }
-        if (manager.tutorial) { startGUI.enabled = false; }
 
+        if (manager.tutorial) { startGUI.enabled = false; }*/
+	}
 
+	public void OpenTutorial() {
+		menuMainScreen.alpha = 0;
+		tutorialScreen.alpha = 1;
+	}
 
+	public void OpenMenu() {
+		mainMenu.alpha = 1;
+		menuMainScreen.alpha = 1;
+		tutorialScreen.alpha = 0;
+	}
+
+	public void CloseMenu() {
+		mainMenu.alpha = 0;
 	}
 
 	public void ChangeOptions(PlayerChoice p){
@@ -58,10 +82,13 @@ public class Interface : MonoBehaviour {
 	}
 
 	public void ChangeColor(int newColorIndex) {
-		if(newColorIndex==0) Background.color = new Color(204f/255f,51f/255f,63f/255f);
-		else if(newColorIndex==1) Background.color = new Color(237f/255f,201f/255f,81f/255f);
-		else if(newColorIndex==2) Background.color = new Color(235f/255f,104f/255f,65f/255f);
-		else Background.color = new Color(0f/255f,160f/255f,176f/255f);
+		Color nColor;
+		if(newColorIndex==0) nColor = new Color(204f/255f,51f/255f,63f/255f);
+		else if(newColorIndex==1) nColor = new Color(237f/255f,201f/255f,81f/255f);
+		else if(newColorIndex==2) nColor = new Color(235f/255f,104f/255f,65f/255f);
+		else nColor = new Color(0f/255f,160f/255f,176f/255f);
+
+		StartCoroutine (LerpBackgroundColor(Background.color,nColor));
 	}
 
 	private void ChangeMainChoice(choiceType mainChoice){ //Changes main color of choice
@@ -116,9 +143,18 @@ public class Interface : MonoBehaviour {
 			b.SetBool ("ReadyInput", false);
 		}
 
-		//Change Selection Text
-		ChangeLastSelectionText(manager.Get_CurrentColor(), choice, manager.previousChoice.curChoice);
+
 	}
+	 
+	public void OnMadeChoice(int choice){
+		//Change Selection Text
+		if(manager.isFirstInput == false) {
+			ChangeLastSelectionText(manager.previousColor, choice, manager.previousChoice.curChoice);
+			Debug.Log ("Previous : " + manager.previousChoice.curChoice + "       Current : " +  manager.currentChoice.curChoice);
+		} else manager.isFirstInput = false;
+			
+	}
+
 
 	private void ChangeLastSelectionText(int color, int choice, choiceType type){
 		string choiceString;
@@ -183,5 +219,14 @@ public class Interface : MonoBehaviour {
 			b.speed = 1;
 		}
 		buttonWrapperAnimator.speed = 1;
+	}
+
+	//Coroutine that lerps the color of the backgroudn
+	IEnumerator LerpBackgroundColor(Color start, Color end) {
+		float time = manager.animationTime/3f;
+		for(float i = 0; i<1; i += Time.deltaTime/time) {
+			Background.color = Color.Lerp(start,end,i);
+			yield return null;
+		}
 	}
 }

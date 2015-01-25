@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
 	private bool[] dPadPressed = new bool[4];
 
 	//Inputs
+	[HideInInspector] public bool isFirstInput = true; //Is is the first input of the game that does not matter ? 
 	public int chosenInput = 0; //Input chosen by the player this turn
 	public bool gameIsOn = false;
     public bool gameIsPaused = false;
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour {
 
 
 	//Colors
+	[HideInInspector] public int previousColor;
 	private int currentColor = -1; //current color, we start with -1 which is none
 	//Colors Method 1 (random every 3 frames)
 	private int amountOfColors = 4; //Amount of different colors
@@ -74,7 +76,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-        PlaySound
 	}
 
 	void OnApplicationQuit(){
@@ -105,7 +106,7 @@ public class GameManager : MonoBehaviour {
         else
         { // ELse, start game if start pressed
             if (Input.GetButtonDown("Start")) StartGame();
-            if (Input.GetButtonDown("share")) tutorial = true;
+			if (Input.GetButtonDown("share")) myInterface.OpenTutorial();
         }
 
 		//Rumble if needed :
@@ -176,7 +177,9 @@ public class GameManager : MonoBehaviour {
 		audioSource = (AudioSource) gameObject.AddComponent<AudioSource>();
 		myAudioClips = new List<AudioClip>();
 		myAudioClips.Add((AudioClip) Resources.Load("Sounds/Sound_Error"));
-        myAudioClips.Add((AudioClip) Resources.Load("SoundS/Confirmed"));
+		myAudioClips.Add((AudioClip) Resources.Load("SoundS/Confirmed_v1"));
+        myAudioClips.Add((AudioClip) Resources.Load("SoundS/Confirmed_v2"));
+		myAudioClips.Add((AudioClip) Resources.Load("Sounds/EndRound"));
 	}
 
 	private void CheckDPadInputs() {
@@ -195,11 +198,7 @@ public class GameManager : MonoBehaviour {
 
 		if(GetAxisDown("Left") || Input.GetButtonDown("Debug Left")) {
 			Debug.Log ("Pressed Left");
-            if (currentChoice.curChoice == choiceType.arrows && isLightRumbling) 
-            {
-                ChooseInput(2);
-                PlaySound(myAudioClips[1]);
-            }
+            if (currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(2);
             else OnInputError(myAudioClips[0]); 
 		}
 		if(GetAxisDown("Right") || Input.GetButtonDown("Debug Right")) {
@@ -339,11 +338,12 @@ public class GameManager : MonoBehaviour {
 	void PlaySound(AudioClip soundToPlay){
 		if(canPlaySound) {
 			audioSource.PlayOneShot(soundToPlay);
-			StartCoroutine (SoundCooldown());
+			//StartCoroutine (SoundCooldown());
 		}
 	}
 
 	void ChooseInput(int newInput) {
+		PlaySound (myAudioClips[1]); //Plays Confirm Sound
 		chosenInput = newInput-1; //Adjust to correspond to table index
 		//Restart The coroutine that manages Choices and Input
 		StopCoroutine ("ChoiceTimer");
@@ -353,6 +353,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void StartGame() {
+		// Close menu
+		myInterface.CloseMenu ();
+
+		isFirstInput = true; //Game has restarted, back to 1st input
 		//Restart Time
         gameOver = false;
 		timeLeft = startTime;
@@ -365,6 +369,8 @@ public class GameManager : MonoBehaviour {
 		for(int i=0; i<amountOfChoices ; i++){
 			currentChoice.nextChoices[i] = (choiceType) UnityEngine.Random.Range(0,amountOfInputOptions);
 		}
+		previousChoice = currentChoice;
+
 		//Restart Coroutine
 		gameIsOn = true;
 		StartCoroutine("ChoiceTimer");
@@ -372,6 +378,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void EndGame() {
+		PlaySound (myAudioClips[3]);//Play End Sound
 		gameIsOn = false;
         gameOver = true;
 		timeLeft = 0;
@@ -422,14 +429,18 @@ public class GameManager : MonoBehaviour {
 		//UpdateColor(); //NOT USED ANYMORE !
 		UpdateColorPoolMethod();
 
+		//Send Event
+		myInterface.OnMadeChoice(chosenInput);
+
 	}
 
 	private void UpdateColorPoolMethod() {
 		int randomIndex = UnityEngine.Random.Range(0,ColorPool.Count); //Get Random Index From list
+		previousColor = currentColor;
 		currentColor = ColorPool[randomIndex]; // Get Color from that index
 		ColorPool.Remove(currentColor); // Remove selected Color from the list
 		ReequilibrateColorPool(); //Fill back Color Pool if one of each color was removed from it
-		myInterface.ChangeColor(currentColor); //Change Color
+
 	}
 
 	private void ReequilibrateColorPool(){//Fill back Color Pool if one of each color was removed from it
@@ -451,6 +462,7 @@ public class GameManager : MonoBehaviour {
 	private void UpdateColor(){
 		if(tickSinceLastChange >= tickToChangeColor) {
 			tickSinceLastChange = 1; //reset the amounts of ticks back to 1
+			previousColor = currentColor;
 			currentColor = GetNewColorIndex();
 			myInterface.ChangeColor(currentColor);
 		} 
@@ -499,6 +511,9 @@ public class GameManager : MonoBehaviour {
 		for(float i = 1; i > 0; i -= Time.deltaTime/(animationTime/3)){
 			yield return null;
 		}
+
+		//StartChanging Color in Interface
+		myInterface.ChangeColor(currentColor); //Change Color
 
 		//Add Transparency
 		for(float i = 1; i > 0; i -= Time.deltaTime/(animationTime/3)){
