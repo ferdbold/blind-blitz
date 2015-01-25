@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 	public Interface myInterface;
 
 	public float timeLeft;
-	public float startTime = 60;
+	public float startTime = 100;
 
     const float AUTO_SWITCH_DELAY = 10f;
 	public float animationTime = 0.5f;
@@ -45,11 +45,15 @@ public class GameManager : MonoBehaviour {
     const int CHOICE_DELAY = 5;
 
 
-	private int amountOfColors = 4; //Amount of different colors
+	//Colors
 	private int currentColor = -1; //current color, we start with -1 which is none
+	//Colors Method 1 (random every 3 frames)
+	private int amountOfColors = 4; //Amount of different colors
 	private int tickSinceLastChange = 0; //amount of ticks since last change we had. When this reaches tickToChangeColor, Change Color
 	public int tickToChangeColor = 3; //Change color every X Tick
-
+	//Colors Method 2 (Other Way to change colors) This changes color every frame with a color pool so it gets all almost equally
+	public List<int> ColorPool;
+	private int poolSize = 3;
    
 
 	//Sounds
@@ -65,6 +69,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
+
 	}
 
 	void OnApplicationQuit(){
@@ -143,6 +148,17 @@ public class GameManager : MonoBehaviour {
         
 		myInterface.OnUnpause ();
     }
+
+	private void BuildColorPool(){
+		ColorPool = new List<int>();
+		for(int i=0; i<poolSize; i++) {
+			ColorPool.Add (0);
+			ColorPool.Add (1);
+			ColorPool.Add (2);
+			ColorPool.Add (3);
+		}
+
+	}
 
 	public bool isGameOn() {
 		if(gameIsOn) return true;
@@ -290,6 +306,8 @@ public class GameManager : MonoBehaviour {
 		//Restart Time
         gameOver = false;
 		timeLeft = startTime;
+		//Build Color pool
+		BuildColorPool();
 		//Create the first choice at random
 		currentChoice = new PlayerChoice();		
 		currentChoice.curChoice = (choiceType) UnityEngine.Random.Range(0,amountOfInputOptions);
@@ -300,6 +318,7 @@ public class GameManager : MonoBehaviour {
 		//Restart Coroutine
 		gameIsOn = true;
 		StartCoroutine("ChoiceTimer");
+
 	}
 
 	void EndGame() {
@@ -340,6 +359,36 @@ public class GameManager : MonoBehaviour {
 		previousChoice = currentChoice;
 		currentChoice = CreatePlayerChoice(); 
 		//Update Color
+		//UpdateColor(); //NOT USED ANYMORE !
+		UpdateColorPoolMethod();
+
+	}
+
+	private void UpdateColorPoolMethod() {
+		int randomIndex = UnityEngine.Random.Range(0,ColorPool.Count); //Get Random Index From list
+		currentColor = ColorPool[randomIndex]; // Get Color from that index
+		ColorPool.Remove(randomIndex); // Remove selected Color from the list
+		ReequilibrateColorPool(); //Fill back Color Pool if one of each color was removed from it
+		myInterface.ChangeColor(currentColor); //Change Color
+	}
+
+	private void ReequilibrateColorPool(){//Fill back Color Pool if one of each color was removed from it
+		int zeros = 0; int ones = 0; int twos = 0;int threes = 0;
+		for(int i=0; i<ColorPool.Count; i++){ //Count Amount of each colors left
+			if(ColorPool[i] == 0) zeros++;
+			else if(ColorPool[i] == 1) ones++;
+			else if(ColorPool[i] == 2) twos++;
+			else threes++;
+		}
+		if(zeros < poolSize && ones < poolSize && twos < poolSize && threes < poolSize){ //If it isn't full, fill it up EQUALLY.
+			ColorPool.Add (0); 
+			ColorPool.Add (1); 
+			ColorPool.Add (2); 
+			ColorPool.Add (3);
+		}
+	}
+
+	private void UpdateColor(){
 		if(tickSinceLastChange >= tickToChangeColor) {
 			tickSinceLastChange = 1; //reset the amounts of ticks back to 1
 			currentColor = GetNewColorIndex();
@@ -347,6 +396,7 @@ public class GameManager : MonoBehaviour {
 		} 
 		else tickSinceLastChange++;
 	}
+
 
 	private int GetNewColorIndex(){
 		int newColor;
