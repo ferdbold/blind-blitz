@@ -4,14 +4,14 @@ using System.Collections;
 
 public class InputScreen : MonoBehaviour {
 
-	private GameManager manager;
+	//private GameManager manager;
 
 	public Image[] ButtonSprites;
 	public bool[,] InputTable;
 
 	// Use this for initialization
 	void Start () {
-		manager = (GameManager) GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+		//manager = (GameManager) GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 		CreateInputTable();
 	}
 	

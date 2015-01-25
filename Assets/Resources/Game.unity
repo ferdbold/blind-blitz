@@ -304,7 +304,7 @@ GameObject:
   - 222: {fileID: 104428195}
   - 114: {fileID: 104428194}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,7 +626,7 @@ GameObject:
   - 222: {fileID: 208655941}
   - 114: {fileID: 208655940}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -941,7 +941,7 @@ GameObject:
   - 222: {fileID: 278945819}
   - 114: {fileID: 278945818}
   m_Layer: 0
-  m_Name: Image RightTrig
+  m_Name: RT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1002,7 +1002,7 @@ GameObject:
   - 222: {fileID: 285210341}
   - 114: {fileID: 285210340}
   m_Layer: 0
-  m_Name: Image
+  m_Name: RT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1063,7 +1063,7 @@ GameObject:
   - 222: {fileID: 286547656}
   - 114: {fileID: 286547655}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1250,7 +1250,7 @@ GameObject:
   - 222: {fileID: 336436884}
   - 114: {fileID: 336436883}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1375,7 +1375,7 @@ GameObject:
   - 222: {fileID: 363989988}
   - 114: {fileID: 363989987}
   m_Layer: 0
-  m_Name: Image RIGHT
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1497,7 +1497,7 @@ GameObject:
   - 222: {fileID: 399885888}
   - 114: {fileID: 399885887}
   m_Layer: 0
-  m_Name: Image
+  m_Name: LS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1558,7 +1558,7 @@ GameObject:
   - 222: {fileID: 517414995}
   - 114: {fileID: 517414994}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1871,7 +1871,7 @@ GameObject:
   - 222: {fileID: 538525859}
   - 114: {fileID: 538525858}
   m_Layer: 0
-  m_Name: Image
+  m_Name: LS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1932,7 +1932,7 @@ GameObject:
   - 222: {fileID: 543543582}
   - 114: {fileID: 543543581}
   m_Layer: 0
-  m_Name: Image LeftJoy
+  m_Name: LS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1993,7 +1993,7 @@ GameObject:
   - 222: {fileID: 550665885}
   - 114: {fileID: 550665884}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2054,7 +2054,7 @@ GameObject:
   - 222: {fileID: 558006542}
   - 114: {fileID: 558006541}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2180,7 +2180,7 @@ GameObject:
   - 222: {fileID: 572112786}
   - 114: {fileID: 572112785}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2282,7 +2282,7 @@ GameObject:
   - 222: {fileID: 602509497}
   - 114: {fileID: 602509496}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2343,7 +2343,7 @@ GameObject:
   - 222: {fileID: 607551189}
   - 114: {fileID: 607551188}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2420,8 +2420,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1270794173}
   - {fileID: 1286077363}
+  - {fileID: 1270794173}
   - {fileID: 1216059556}
   - {fileID: 363989986}
   m_Father: {fileID: 1242461139}
@@ -2469,7 +2469,7 @@ GameObject:
   - 222: {fileID: 655885351}
   - 114: {fileID: 655885350}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2530,7 +2530,7 @@ GameObject:
   - 222: {fileID: 731638008}
   - 114: {fileID: 731638007}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2804,7 +2804,7 @@ GameObject:
   - 222: {fileID: 787114188}
   - 114: {fileID: 787114187}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2999,7 +2999,7 @@ GameObject:
   - 222: {fileID: 868077599}
   - 114: {fileID: 868077598}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3060,7 +3060,7 @@ GameObject:
   - 222: {fileID: 896065729}
   - 114: {fileID: 896065728}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3446,7 +3446,7 @@ GameObject:
   - 222: {fileID: 1023546088}
   - 114: {fileID: 1023546087}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3507,7 +3507,7 @@ GameObject:
   - 222: {fileID: 1063561335}
   - 114: {fileID: 1063561334}
   m_Layer: 0
-  m_Name: Image
+  m_Name: RS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3633,7 +3633,7 @@ GameObject:
   - 222: {fileID: 1099831584}
   - 114: {fileID: 1099831583}
   m_Layer: 0
-  m_Name: Image
+  m_Name: LT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3863,7 +3863,7 @@ GameObject:
   - 222: {fileID: 1160696348}
   - 114: {fileID: 1160696347}
   m_Layer: 0
-  m_Name: Image LeftTrig
+  m_Name: LT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4007,7 +4007,7 @@ GameObject:
   - 222: {fileID: 1193419412}
   - 114: {fileID: 1193419411}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4280,7 +4280,7 @@ GameObject:
   - 222: {fileID: 1216059558}
   - 114: {fileID: 1216059557}
   m_Layer: 0
-  m_Name: Image LEFT
+  m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4390,7 +4390,7 @@ GameObject:
   - 222: {fileID: 1241620746}
   - 114: {fileID: 1241620745}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4515,7 +4515,7 @@ GameObject:
   - 222: {fileID: 1261750726}
   - 114: {fileID: 1261750725}
   m_Layer: 0
-  m_Name: Image
+  m_Name: RT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4576,7 +4576,7 @@ GameObject:
   - 222: {fileID: 1270626799}
   - 114: {fileID: 1270626798}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4637,7 +4637,7 @@ GameObject:
   - 222: {fileID: 1270794175}
   - 114: {fileID: 1270794174}
   m_Layer: 0
-  m_Name: Image DOWN
+  m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4654,7 +4654,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 630012918}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: .400000006, y: .100000001}
   m_AnchorMax: {x: .600000024, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -4783,7 +4783,7 @@ GameObject:
   - 222: {fileID: 1286077365}
   - 114: {fileID: 1286077364}
   m_Layer: 0
-  m_Name: Image UP
+  m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4800,7 +4800,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 630012918}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_AnchorMin: {x: .400000006, y: .5}
   m_AnchorMax: {x: .600000024, y: .899999976}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -5167,7 +5167,7 @@ GameObject:
   - 222: {fileID: 1315722555}
   - 114: {fileID: 1315722554}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5289,7 +5289,7 @@ GameObject:
   - 222: {fileID: 1379290922}
   - 114: {fileID: 1379290921}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5414,7 +5414,7 @@ GameObject:
   - 222: {fileID: 1385255513}
   - 114: {fileID: 1385255512}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5603,7 +5603,7 @@ GameObject:
   - 222: {fileID: 1471110616}
   - 114: {fileID: 1471110615}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5811,7 +5811,7 @@ GameObject:
   - 222: {fileID: 1538469459}
   - 114: {fileID: 1538469458}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5872,7 +5872,7 @@ GameObject:
   - 222: {fileID: 1572663441}
   - 114: {fileID: 1572663440}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6226,7 +6226,7 @@ GameObject:
   - 222: {fileID: 1673654928}
   - 114: {fileID: 1673654927}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6287,7 +6287,7 @@ GameObject:
   - 222: {fileID: 1715606895}
   - 114: {fileID: 1715606894}
   m_Layer: 0
-  m_Name: Image
+  m_Name: LT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6348,7 +6348,7 @@ GameObject:
   - 222: {fileID: 1717597754}
   - 114: {fileID: 1717597753}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6559,10 +6559,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonSprites:
-  - {fileID: 1270794174}
+  - {fileID: 1286077364}
   - {fileID: 1216059557}
   - {fileID: 363989987}
-  - {fileID: 1286077364}
+  - {fileID: 1270794174}
   - {fileID: 602509496}
   - {fileID: 1385255512}
   - {fileID: 517414994}
@@ -6571,42 +6571,42 @@ MonoBehaviour:
   - {fileID: 543543581}
   - {fileID: 278945818}
   - {fileID: 2141864006}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1270626798}
+  - {fileID: 550665884}
+  - {fileID: 1538469458}
+  - {fileID: 1717597753}
+  - {fileID: 607551188}
+  - {fileID: 336436883}
+  - {fileID: 1193419411}
+  - {fileID: 787114187}
+  - {fileID: 1844433314}
+  - {fileID: 1810011044}
+  - {fileID: 1261750725}
+  - {fileID: 2121315364}
+  - {fileID: 1471110615}
+  - {fileID: 655885350}
+  - {fileID: 731638007}
+  - {fileID: 1673654927}
+  - {fileID: 286547655}
+  - {fileID: 1315722554}
+  - {fileID: 1241620745}
+  - {fileID: 1572663440}
+  - {fileID: 1715606894}
+  - {fileID: 538525858}
+  - {fileID: 2008171665}
+  - {fileID: 1063561334}
+  - {fileID: 104428194}
+  - {fileID: 1974712493}
+  - {fileID: 896065728}
+  - {fileID: 558006541}
+  - {fileID: 868077598}
+  - {fileID: 208655940}
+  - {fileID: 1379290921}
+  - {fileID: 1023546087}
+  - {fileID: 1099831583}
+  - {fileID: 399885887}
+  - {fileID: 285210340}
+  - {fileID: 1927129513}
 --- !u!1 &1764403859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6679,7 +6679,7 @@ GameObject:
   - 222: {fileID: 1810011045}
   - 114: {fileID: 1810011044}
   m_Layer: 0
-  m_Name: Image
+  m_Name: LS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6853,7 +6853,7 @@ GameObject:
   - 222: {fileID: 1844433315}
   - 114: {fileID: 1844433314}
   m_Layer: 0
-  m_Name: Image
+  m_Name: LT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7043,7 +7043,7 @@ GameObject:
   - 222: {fileID: 1927129514}
   - 114: {fileID: 1927129513}
   m_Layer: 0
-  m_Name: Image
+  m_Name: RS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7104,7 +7104,7 @@ GameObject:
   - 222: {fileID: 1974712494}
   - 114: {fileID: 1974712493}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7300,7 +7300,7 @@ GameObject:
   - 222: {fileID: 2008171666}
   - 114: {fileID: 2008171665}
   m_Layer: 0
-  m_Name: Image
+  m_Name: RT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7680,7 +7680,7 @@ GameObject:
   - 222: {fileID: 2121315365}
   - 114: {fileID: 2121315364}
   m_Layer: 0
-  m_Name: Image
+  m_Name: RS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7866,7 +7866,7 @@ GameObject:
   - 222: {fileID: 2141864007}
   - 114: {fileID: 2141864006}
   m_Layer: 0
-  m_Name: Image RightJoy
+  m_Name: RS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
