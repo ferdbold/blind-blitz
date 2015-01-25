@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections;
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector] public PlayerChoice previousChoice;
 	public PlayerChoice currentChoice;
 	public Interface myInterface;
+	public InputScreen myInputScreen;
 
     int cptAffichageMenu = 0;
     const int NOMBRE_MENUS = 4;
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour {
     const float DELAY = 5f;
 
 	private bool[] dPadPressed = new bool[4];
+
+
 
 	//Inputs
 	[HideInInspector] public bool isFirstInput = true; //Is is the first input of the game that does not matter ? 
@@ -259,7 +262,7 @@ public class GameManager : MonoBehaviour {
 		CheckDPadInputs ();
 
 		if(Input.GetButtonDown("Triangle")) {
-			Debug.Log ("Pressed Triangle");
+			//Debug.Log ("Pressed Triangle");
             if (currentChoice.curChoice == choiceType.buttons && isLightRumbling)
             {
                 ChooseInput(1);
@@ -268,7 +271,7 @@ public class GameManager : MonoBehaviour {
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("Square")) {
-			Debug.Log ("Pressed Square");
+			//Debug.Log ("Pressed Square");
             if (currentChoice.curChoice == choiceType.buttons && isLightRumbling)
             {
                 ChooseInput(2);
@@ -277,7 +280,7 @@ public class GameManager : MonoBehaviour {
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("X")) {
-			Debug.Log ("Pressed Cross");
+			//Debug.Log ("Pressed Cross");
             if (currentChoice.curChoice == choiceType.buttons && isLightRumbling)
             {
                 ChooseInput(4);
@@ -286,7 +289,7 @@ public class GameManager : MonoBehaviour {
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("Round")) {
-			Debug.Log ("Pressed Circle");
+			//Debug.Log ("Pressed Circle");
             if (currentChoice.curChoice == choiceType.buttons && isLightRumbling)
             {
                 ChooseInput(3);
@@ -347,7 +350,8 @@ public class GameManager : MonoBehaviour {
 		chosenInput = newInput-1; //Adjust to correspond to table index
 		//Restart The coroutine that manages Choices and Input
 		StopCoroutine ("ChoiceTimer");
-		//Send Event to Interface
+		//Send Event to Interface & InputScreen
+		myInputScreen.OnInput(chosenInput, currentColor, currentChoice.curChoice);
 		myInterface.OnSelectInput(chosenInput);
 		StartCoroutine ("ChoiceTimer");
 	}

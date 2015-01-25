@@ -83,10 +83,10 @@ public class Interface : MonoBehaviour {
 
 	public void ChangeColor(int newColorIndex) {
 		Color nColor;
-		if(newColorIndex==0) nColor = new Color(204f/255f,51f/255f,63f/255f);
-		else if(newColorIndex==1) nColor = new Color(237f/255f,201f/255f,81f/255f);
-		else if(newColorIndex==2) nColor = new Color(235f/255f,104f/255f,65f/255f);
-		else nColor = new Color(0f/255f,160f/255f,176f/255f);
+		if(newColorIndex==0) nColor = new Color(204f/255f,51f/255f,63f/255f); //RED
+		else if(newColorIndex==1) nColor = new Color(237f/255f,201f/255f,81f/255f); //YELLOW
+		else if(newColorIndex==2) nColor = new Color(235f/255f,104f/255f,65f/255f); //ORANGE
+		else nColor = new Color(0f/255f,160f/255f,176f/255f); //BLUE
 
 		StartCoroutine (LerpBackgroundColor(Background.color,nColor));
 	}
@@ -150,7 +150,7 @@ public class Interface : MonoBehaviour {
 		//Change Selection Text
 		if(manager.isFirstInput == false) {
 			ChangeLastSelectionText(manager.previousColor, choice, manager.previousChoice.curChoice);
-			Debug.Log ("Previous : " + manager.previousChoice.curChoice + "       Current : " +  manager.currentChoice.curChoice);
+			//Debug.Log ("Previous : " + manager.previousChoice.curChoice + "       Current : " +  manager.currentChoice.curChoice);
 		} else manager.isFirstInput = false;
 			
 	}
