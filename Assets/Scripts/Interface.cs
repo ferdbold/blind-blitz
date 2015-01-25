@@ -6,6 +6,7 @@ public class Interface : MonoBehaviour {
 	public Text timerGUI;
     public Text pauseGUI;
     public Text endGameGUI;
+    public Text startGUI;
 	public Image[] options;
 	public Image[] secOptions;
 	public Image Background;
@@ -34,6 +35,7 @@ public class Interface : MonoBehaviour {
         if(manager.gameOver)
         { endGameGUI.enabled = true; }
         else { endGameGUI.enabled = false; }
+        if (manager.gameIsOn) { startGUI.enabled = false; }
 
 	}
 

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
 	//Inputs
 	public int chosenInput = 0; //Input chosen by the player this turn
 	private bool isChoosing = false;
-	private bool gameIsOn = false;
+	public bool gameIsOn = false;
     public bool gameIsPaused = false;
     private bool pauseIsPressed = false;
     public bool gameOver = false;
