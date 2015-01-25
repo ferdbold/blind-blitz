@@ -370,7 +370,7 @@ public class GameManager : MonoBehaviour {
 	private void UpdateColorPoolMethod() {
 		int randomIndex = UnityEngine.Random.Range(0,ColorPool.Count); //Get Random Index From list
 		currentColor = ColorPool[randomIndex]; // Get Color from that index
-		ColorPool.Remove(randomIndex); // Remove selected Color from the list
+		ColorPool.Remove(currentColor); // Remove selected Color from the list
 		ReequilibrateColorPool(); //Fill back Color Pool if one of each color was removed from it
 		myInterface.ChangeColor(currentColor); //Change Color
 	}
