@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
 	public List<AudioClip> myAudioClips; //List of Audioclips used
 	private AudioSource audioSource; //AudioSource Created on Awake
 	private bool canPlaySound = true; //Can we currently play sound
-	private float timeInBetweenSounds = 1f; //cant have 2 sounds in the same second
+	private float timeInBetweenSounds = 0.5f; //cant have 2 sounds in the same second
 
 	// Use this for initialization
 	void Awake(){
