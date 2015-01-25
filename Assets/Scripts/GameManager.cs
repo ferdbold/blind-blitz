@@ -96,6 +96,13 @@ public class GameManager : MonoBehaviour {
                 if (Input.GetButtonDown("Start")) Pause();
             }
         }
+		else if (gameOver) {
+			if (Input.GetButtonDown ("share")) {
+				gameIsOn = false;
+				gameOver = false;
+				myInterface.OpenMenu ();
+			}
+		}
         else
         { // ELse, start game if start pressed
             if (Input.GetButtonDown("Start")) StartGame();
@@ -347,6 +354,7 @@ public class GameManager : MonoBehaviour {
 	void StartGame() {
 		// Close menu
 		myInterface.CloseMenu ();
+		myInterface.CloseEndGameMenu ();
 
 		isFirstInput = true; //Game has restarted, back to 1st input
 		//Restart Time
@@ -380,6 +388,8 @@ public class GameManager : MonoBehaviour {
 		RumbleController(0);
 		isHeavyRumbling = false;
 		isLightRumbling = false;
+
+		myInterface.OpenEndGameMenu();
 	}
 
 	public void RumbleController(float intensity) {
