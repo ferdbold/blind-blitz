@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using XInputDotNetPure;
+
 
 
 public enum choiceType {arrows,buttons,triggers};
@@ -20,12 +22,12 @@ public class GameManager : MonoBehaviour {
 	public float animationTime = 0.5f;
     const float DELAY = 5f;
 
+	private bool[] dPadPressed = new bool[4];
+
 	//Inputs
 	public int chosenInput = 0; //Input chosen by the player this turn
-	private bool isChoosing = false;
-	public bool gameIsOn = false;
+	private bool gameIsOn = false;
     public bool gameIsPaused = false;
-    private bool pauseIsPressed = false;
     public bool gameOver = false;
 
 	//Rumble
@@ -62,11 +64,15 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-
 	}
 
 	void OnApplicationQuit(){
-		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+		try {
+			//System.Reflection.Assembly.GetExecutingAssembly().GetType("GamePad", true);
+			GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+		} catch (TypeLoadException e) {
+			Debug.Log ("No rumble support, continuing: " + e.Data);
+		}
 	}
 	
 
@@ -96,30 +102,45 @@ public class GameManager : MonoBehaviour {
         }
 
 		//Rumble if needed :
-		if(isHeavyRumbling) {
-			GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
-		} else if(isLightRumbling) {
-			GamePad.SetVibration(PlayerIndex.One, 0.35f, 0.35f);
-		}
-       
-    }
+		if(!gameIsPaused) {
+			try {
+				//System.Reflection.Assembly.GetExecutingAssembly().GetType("GamePad", true);
+				if(isHeavyRumbling) {
+					GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+				} else if(isLightRumbling) {
+					GamePad.SetVibration(PlayerIndex.One, 0.35f, 0.35f);
+				}
+
+			} catch (TypeLoadException e) {
+				Debug.Log ("No rumble support, continuing: " + e.Data);
+			}
+   	 	}
+	}
     
 
-    void Pause() { /// TEMPORARY : REMOVED TIMESALE
+    void Pause() {
 		//Debug.Log ("Paused");
         gameIsPaused = true;
-        pauseIsPressed = true;
 
         Debug.Log("game is paused");
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
+
+		//Remove Rumble 
+		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+
+		myInterface.OnPause ();
+
     }
 
     void Unpause() {
-
         gameIsPaused = false;
-        pauseIsPressed = true;
-        //Time.timeScale = 1;
+        Time.timeScale = 1;
+
+		//Resume Rumble
+		if(isLightRumbling) GamePad.SetVibration(PlayerIndex.One, 0.35f, .35f);
+		else if(isHeavyRumbling) GamePad.SetVibration(PlayerIndex.One, 1f, 1f);
         
+		myInterface.OnUnpause ();
     }
 
 	public bool isGameOn() {
@@ -136,24 +157,69 @@ public class GameManager : MonoBehaviour {
 		myAudioClips.Add((AudioClip) Resources.Load("Sounds/Sound_Error"));
 	}
 
-	void CheckInputs(){
-		if(Input.GetAxis("Left") > 0 || Input.GetButtonDown("Debug Left")) {
+	private void CheckDPadInputs() {
+		if (Input.GetAxis ("Up") == 0) {
+			dPadPressed [0] = false;
+		}
+		if (Input.GetAxis ("Left") == 0) {
+			dPadPressed [1] = false;
+		} 
+		if (Input.GetAxis ("Right") == 0) {
+			dPadPressed [2] = false;
+		}
+		if (Input.GetAxis ("Down") == 0) {
+			dPadPressed [3] = false;
+		}
+
+		if(GetAxisDown("Left") || Input.GetButtonDown("Debug Left")) {
 			Debug.Log ("Pressed Left");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(2);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Right") > 0 || Input.GetButtonDown("Debug Right")) {
+		if(GetAxisDown("Right") || Input.GetButtonDown("Debug Right")) {
+			Debug.Log ("Pressed Right");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(3);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Up") > 0 || Input.GetButtonDown("Debug Up")) {
+		if(GetAxisDown("Up") || Input.GetButtonDown("Debug Up")) {
+			Debug.Log ("Pressed Up");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(1);
 			else OnInputError(myAudioClips[0]); 
 		}
-		if(Input.GetAxis("Down") > 0 || Input.GetButtonDown("Debug Down")) {
+		if(GetAxisDown("Down") || Input.GetButtonDown("Debug Down")) {
+			Debug.Log ("Pressed Down");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(4);
 			else OnInputError(myAudioClips[0]); 
 		}
+	}
+
+	private bool GetAxisDown(string axisName) {
+		int idButton = 0;
+		switch (axisName) {
+			case "Up":
+					idButton = 0;
+					break;
+			case "Left":
+					idButton = 1;
+					break;
+			case "Right":
+					idButton = 2;
+					break;
+			case "Down":
+					idButton = 3;
+					break;
+		}
+
+		if (Input.GetAxis (axisName) > 0 && !dPadPressed [idButton]) {
+			dPadPressed[idButton] = true;
+			return true;
+		}
+
+		return false;
+	}
+
+	void CheckInputs(){
+		CheckDPadInputs ();
 
 		if(Input.GetButtonDown("Triangle")) {
 			Debug.Log ("Pressed Triangle");
@@ -209,7 +275,6 @@ public class GameManager : MonoBehaviour {
 
 	void ChooseInput(int newInput) {
 		chosenInput = newInput-1; //Adjust to correspond to table index
-		isChoosing = false;
 		//Restart The coroutine that manages Choices and Input
 		StopCoroutine("ChoiceTimer");
 		StartCoroutine("ChoiceTimer");
@@ -223,14 +288,13 @@ public class GameManager : MonoBehaviour {
 		timeLeft = startTime;
 		//Create the first choice at random
 		currentChoice = new PlayerChoice();		
-		currentChoice.curChoice = (choiceType) Random.Range(0,amountOfInputOptions);
+		currentChoice.curChoice = (choiceType) UnityEngine.Random.Range(0,amountOfInputOptions);
 		currentChoice.nextChoices = new choiceType[amountOfChoices];
 		for(int i=0; i<amountOfChoices ; i++){
-			currentChoice.nextChoices[i] = (choiceType) Random.Range(0,amountOfInputOptions);
+			currentChoice.nextChoices[i] = (choiceType) UnityEngine.Random.Range(0,amountOfInputOptions);
 		}
 		//Restart Coroutine
 		gameIsOn = true;
-        pauseIsPressed = true;
 		StartCoroutine("ChoiceTimer");
 	}
 
@@ -240,8 +304,6 @@ public class GameManager : MonoBehaviour {
 		timeLeft = 0;
 		//StopCoroutine
 		StopCoroutine("ChoiceTimer");
-		//Remove controls
-		isChoosing = false;
 	}
 
 	PlayerChoice CreatePlayerChoice(){
@@ -249,7 +311,7 @@ public class GameManager : MonoBehaviour {
 		myNewChoice.curChoice = currentChoice.nextChoices[chosenInput];
 		myNewChoice.nextChoices = new choiceType[amountOfChoices];
 		for(int i=0; i<amountOfChoices ; i++){
-			myNewChoice.nextChoices[i] = (choiceType) Random.Range(0,amountOfInputOptions);
+			myNewChoice.nextChoices[i] = (choiceType) UnityEngine.Random.Range(0,amountOfInputOptions);
 		}
 		return myNewChoice;
 
@@ -259,9 +321,16 @@ public class GameManager : MonoBehaviour {
 		//Reset Rumble Values
 		isHeavyRumbling = false;
 		isLightRumbling = false;
-		timeUntilLightRumble = Random.Range (timeUntilLightRumble_MIN,timeUntilLightRumble_MAX);
+		timeUntilLightRumble = UnityEngine.Random.Range (timeUntilLightRumble_MIN,timeUntilLightRumble_MAX);
 		malusTemps = 1;
-		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+
+		try {
+			//System.Reflection.Assembly.GetExecutingAssembly().GetType("GamePad", true);
+			GamePad.SetVibration (PlayerIndex.One, 0f, 0f);
+		} catch (TypeLoadException e) {
+			Debug.Log ("No rumble support, continuing:" + e.Data);
+		}
+
 		//Make a new choice
 		currentChoice = CreatePlayerChoice(); 
 		//Update Color
@@ -277,7 +346,7 @@ public class GameManager : MonoBehaviour {
 		int newColor;
 
 		do {
-			newColor = Random.Range (0,amountOfColors);
+			newColor = UnityEngine.Random.Range (0,amountOfColors);
 		} while(newColor == currentColor);
 
 		return newColor;
@@ -290,7 +359,6 @@ public class GameManager : MonoBehaviour {
             yield return new WaitForSeconds(animationTime); //Wait while we animate buttons
 
             yield return new WaitForSeconds(timeUntilLightRumble);
-			isChoosing = true; //give back controls
 			isLightRumbling = true;
 			myInterface.OnReadyInput ();
 			yield return new WaitForSeconds(timeUntilHeavyRumble);

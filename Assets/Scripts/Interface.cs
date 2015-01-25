@@ -35,7 +35,7 @@ public class Interface : MonoBehaviour {
         if(manager.gameOver)
         { endGameGUI.enabled = true; }
         else { endGameGUI.enabled = false; }
-        if (manager.gameIsOn) { startGUI.enabled = false; }
+        if (manager.isGameOn()) { startGUI.enabled = false; }
 
 	}
 
@@ -114,5 +114,19 @@ public class Interface : MonoBehaviour {
 		foreach (Animator a in buttonEffectsAnimators) {
 			a.SetTrigger("Error");
 		}
+	}
+
+	public void OnPause() {
+		foreach(Animator b in buttonEffectsAnimators) {
+			b.speed = 0;
+		}
+		buttonWrapperAnimator.speed = 0;
+	}
+
+	public void OnUnpause() {
+		foreach(Animator b in buttonEffectsAnimators) {
+			b.speed = 1;
+		}
+		buttonWrapperAnimator.speed = 1;
 	}
 }
