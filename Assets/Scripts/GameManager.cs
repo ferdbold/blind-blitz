@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-
 	}
 
 	void OnApplicationQuit(){
@@ -106,7 +105,7 @@ public class GameManager : MonoBehaviour {
         else
         { // ELse, start game if start pressed
             if (Input.GetButtonDown("Start")) StartGame();
-            if (Input.GetButtonDown("share")) tutorial = true;
+			if (Input.GetButtonDown("share")) myInterface.OpenTutorial();
         }
 
 		//Rumble if needed :
@@ -313,6 +312,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void StartGame() {
+		// Close menu
+		myInterface.CloseMenu ();
+
 		isFirstInput = true; //Game has restarted, back to 1st input
 		//Restart Time
         gameOver = false;
