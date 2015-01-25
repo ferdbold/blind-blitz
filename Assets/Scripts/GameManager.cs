@@ -76,12 +76,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnApplicationQuit(){
-		try {
-			//System.Reflection.Assembly.GetExecutingAssembly().GetType("GamePad", true);
-			GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
-		} catch (TypeLoadException e) {
-			Debug.Log ("No rumble support, continuing: " + e.Data);
-		}
+		RumbleController(0);
 	}
 	
 
@@ -115,9 +110,9 @@ public class GameManager : MonoBehaviour {
 			try {
 				//System.Reflection.Assembly.GetExecutingAssembly().GetType("GamePad", true);
 				if(isHeavyRumbling) {
-					GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+					RumbleController(1);
 				} else if(isLightRumbling) {
-					GamePad.SetVibration(PlayerIndex.One, 0.35f, 0.35f);
+					RumbleController(0.35f);
 				}
 
 			} catch (TypeLoadException e) {
@@ -135,7 +130,7 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0;
 
 		//Remove Rumble
-		GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+		RumbleController(0);
 
 		myInterface.OnPause ();
 
@@ -146,8 +141,8 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 1;
 
 		//Resume Rumble
-		if(isLightRumbling) GamePad.SetVibration(PlayerIndex.One, 0.35f, .35f);
-		else if(isHeavyRumbling) GamePad.SetVibration(PlayerIndex.One, 1f, 1f);
+		if(isLightRumbling) RumbleController(0.35f);
+		else if(isHeavyRumbling) RumbleController(1f);
         
 		myInterface.OnUnpause ();
     }
@@ -330,7 +325,21 @@ public class GameManager : MonoBehaviour {
 		timeLeft = 0;
 		//StopCoroutine
 		StopCoroutine("ChoiceTimer");
+		//Stop Rumbling
+		RumbleController(0);
+		isHeavyRumbling = false;
+		isLightRumbling = false;
 	}
+
+	public void RumbleController(float intensity) {
+		try {
+			//System.Reflection.Assembly.GetExecutingAssembly().GetType("GamePad", true);
+			GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
+		} catch (TypeLoadException e) {
+			Debug.Log ("No rumble support, continuing: " + e.Data);
+		} 
+	}
+
 
 	PlayerChoice CreatePlayerChoice(){
 
@@ -351,12 +360,8 @@ public class GameManager : MonoBehaviour {
 		timeUntilLightRumble = UnityEngine.Random.Range (timeUntilLightRumble_MIN,timeUntilLightRumble_MAX);
 		malusTemps = 1;
 
-		try {
-			//System.Reflection.Assembly.GetExecutingAssembly().GetType("GamePad", true);
-			GamePad.SetVibration (PlayerIndex.One, 0f, 0f);
-		} catch (TypeLoadException e) {
-			Debug.Log ("No rumble support, continuing:" + e.Data);
-		}
+		//stop Rumble
+		RumbleController(0);
 
 		//Make a new choice
 		previousChoice = currentChoice;
