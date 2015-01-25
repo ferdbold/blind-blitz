@@ -160,11 +160,14 @@ public class GameManager : MonoBehaviour {
 	private void CheckDPadInputs() {
 		if (Input.GetAxis ("Up") == 0) {
 			dPadPressed [0] = false;
-		} else if (Input.GetAxis ("Left") == 0) {
+		}
+		if (Input.GetAxis ("Left") == 0) {
 			dPadPressed [1] = false;
-		} else if (Input.GetAxis ("Right") == 0) {
+		} 
+		if (Input.GetAxis ("Right") == 0) {
 			dPadPressed [2] = false;
-		} else if (Input.GetAxis ("Down") == 0) {
+		}
+		if (Input.GetAxis ("Down") == 0) {
 			dPadPressed [3] = false;
 		}
 
@@ -174,14 +177,17 @@ public class GameManager : MonoBehaviour {
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(GetAxisDown("Right") || Input.GetButtonDown("Debug Right")) {
+			Debug.Log ("Pressed Right");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(3);
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(GetAxisDown("Up") || Input.GetButtonDown("Debug Up")) {
+			Debug.Log ("Pressed Up");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(1);
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(GetAxisDown("Down") || Input.GetButtonDown("Debug Down")) {
+			Debug.Log ("Pressed Down");
 			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(4);
 			else OnInputError(myAudioClips[0]); 
 		}
