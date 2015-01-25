@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour {
 
 	//Sounds
 	public List<AudioClip> myAudioClips; //List of Audioclips used
+    public AudioClip Music;
 	private AudioSource audioSource; //AudioSource Created on Awake
 	private bool canPlaySound = true; //Can we currently play sound
 	private float timeInBetweenSounds = 0.5f; //cant have 2 sounds in the same second
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-
+        PlaySound
 	}
 
 	void OnApplicationQuit(){
@@ -203,17 +204,29 @@ public class GameManager : MonoBehaviour {
 		}
 		if(GetAxisDown("Right") || Input.GetButtonDown("Debug Right")) {
 			Debug.Log ("Pressed Right");
-			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(3);
-			else OnInputError(myAudioClips[0]); 
+            if (currentChoice.curChoice == choiceType.arrows && isLightRumbling)
+            {
+                ChooseInput(3);
+                PlaySound(myAudioClips[1]);
+            }
+            else OnInputError(myAudioClips[0]); 
 		}
 		if(GetAxisDown("Up") || Input.GetButtonDown("Debug Up")) {
 			Debug.Log ("Pressed Up");
-			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(1);
+            if (currentChoice.curChoice == choiceType.arrows && isLightRumbling)
+            {
+                ChooseInput(1);
+                PlaySound(myAudioClips[1]);
+            }
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(GetAxisDown("Down") || Input.GetButtonDown("Debug Down")) {
 			Debug.Log ("Pressed Down");
-			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(4);
+            if (currentChoice.curChoice == choiceType.arrows && isLightRumbling) if (currentChoice.curChoice == choiceType.arrows && isLightRumbling)
+                {
+                    ChooseInput(4);
+                    PlaySound(myAudioClips[1]);
+                }
 			else OnInputError(myAudioClips[0]); 
 		}
 	}
@@ -248,42 +261,70 @@ public class GameManager : MonoBehaviour {
 
 		if(Input.GetButtonDown("Triangle")) {
 			Debug.Log ("Pressed Triangle");
-			if(currentChoice.curChoice == choiceType.buttons && isLightRumbling) ChooseInput(1);
+            if (currentChoice.curChoice == choiceType.buttons && isLightRumbling)
+            {
+                ChooseInput(1);
+                PlaySound(myAudioClips[1]);
+            }
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("Square")) {
 			Debug.Log ("Pressed Square");
-			if(currentChoice.curChoice == choiceType.buttons && isLightRumbling) ChooseInput(2);
+            if (currentChoice.curChoice == choiceType.buttons && isLightRumbling)
+            {
+                ChooseInput(2);
+                PlaySound(myAudioClips[1]);
+            }
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("X")) {
 			Debug.Log ("Pressed Cross");
-			if(currentChoice.curChoice == choiceType.buttons && isLightRumbling) ChooseInput(4);
+            if (currentChoice.curChoice == choiceType.buttons && isLightRumbling)
+            {
+                ChooseInput(4);
+                PlaySound(myAudioClips[1]);
+            }
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("Round")) {
 			Debug.Log ("Pressed Circle");
-			if(currentChoice.curChoice == choiceType.buttons && isLightRumbling) ChooseInput(3);
+            if (currentChoice.curChoice == choiceType.buttons && isLightRumbling)
+            {
+                ChooseInput(3);
+                PlaySound(myAudioClips[1]);
+            }
 			else OnInputError(myAudioClips[0]); 
 		}
 
 		if(Input.GetButtonDown("LT")) {
-			if(currentChoice.curChoice == choiceType.triggers && isLightRumbling) ChooseInput(1);
-			else OnInputError(myAudioClips[0]); 
+            if (currentChoice.curChoice == choiceType.triggers && isLightRumbling)
+            {
+                ChooseInput(1);
+                PlaySound(myAudioClips[1]);
+            }
+            else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("RT")) {
-			if(currentChoice.curChoice == choiceType.triggers && isLightRumbling) ChooseInput(3);
+            if (currentChoice.curChoice == choiceType.triggers && isLightRumbling)
+            {
+                ChooseInput(3);
+                PlaySound(myAudioClips[1]);
+            }
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("LJ")) {
-			if(currentChoice.curChoice == choiceType.triggers && isLightRumbling) ChooseInput(2);
+            if (currentChoice.curChoice == choiceType.triggers && isLightRumbling)
+            {
+                ChooseInput(2);
+                PlaySound(myAudioClips[1]);
+            }
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("RJ")) {
             if (currentChoice.curChoice == choiceType.triggers && isLightRumbling)
             {
                 ChooseInput(4);
-
+                PlaySound(myAudioClips[1]);
             }
             else OnInputError(myAudioClips[0]); 
 		}
