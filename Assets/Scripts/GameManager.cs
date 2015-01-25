@@ -30,9 +30,10 @@ public class GameManager : MonoBehaviour {
 
 	//Inputs
 	public int chosenInput = 0; //Input chosen by the player this turn
-	private bool gameIsOn = false;
+	public bool gameIsOn = false;
     public bool gameIsPaused = false;
     public bool gameOver = false;
+    public bool tutorial = false;
 
 	//Rumble
 	private float timeUntilLightRumble; //Time until controller starts to vibrate and player can make a choice
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour {
         else
         { // ELse, start game if start pressed
             if (Input.GetButtonDown("Start")) StartGame();
+            if (Input.GetButtonDown("share")) tutorial = true;
         }
 
 		//Rumble if needed :
@@ -173,6 +175,7 @@ public class GameManager : MonoBehaviour {
 		audioSource = (AudioSource) gameObject.AddComponent<AudioSource>();
 		myAudioClips = new List<AudioClip>();
 		myAudioClips.Add((AudioClip) Resources.Load("Sounds/Sound_Error"));
+        myAudioClips.Add((AudioClip) Resources.Load("SoundS/Confirmed"));
 	}
 
 	private void CheckDPadInputs() {
@@ -191,8 +194,12 @@ public class GameManager : MonoBehaviour {
 
 		if(GetAxisDown("Left") || Input.GetButtonDown("Debug Left")) {
 			Debug.Log ("Pressed Left");
-			if(currentChoice.curChoice == choiceType.arrows && isLightRumbling) ChooseInput(2);
-			else OnInputError(myAudioClips[0]); 
+            if (currentChoice.curChoice == choiceType.arrows && isLightRumbling) 
+            {
+                ChooseInput(2);
+                PlaySound(myAudioClips[1]);
+            }
+            else OnInputError(myAudioClips[0]); 
 		}
 		if(GetAxisDown("Right") || Input.GetButtonDown("Debug Right")) {
 			Debug.Log ("Pressed Right");
@@ -273,8 +280,12 @@ public class GameManager : MonoBehaviour {
 			else OnInputError(myAudioClips[0]); 
 		}
 		if(Input.GetButtonDown("RJ")) {
-			if(currentChoice.curChoice == choiceType.triggers && isLightRumbling) ChooseInput(4);
-			else OnInputError(myAudioClips[0]); 
+            if (currentChoice.curChoice == choiceType.triggers && isLightRumbling)
+            {
+                ChooseInput(4);
+
+            }
+            else OnInputError(myAudioClips[0]); 
 		}
 	}
 

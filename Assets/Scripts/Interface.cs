@@ -7,10 +7,12 @@ public class Interface : MonoBehaviour {
     public Text pauseGUI;
     public Text endGameGUI;
     public Text startGUI;
+    public Text txtTutorial;
 	public Image[] options;
 	public Image[] secOptions;
 	public Image Background;
 	public Text LastSelectionText;
+    public Image bgMenu;
 
 	public Animator buttonWrapperAnimator;
 	public Animator[] buttonEffectsAnimators;
@@ -24,10 +26,13 @@ public class Interface : MonoBehaviour {
 
 	void Start () {
 		manager = (GameManager) GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        txtTutorial.enabled = false;
 	}
 
 	void Update () {
 		//Timer
+        if(manager.gameIsOn)
+        { bgMenu.enabled = false; }
 		timerGUI.text = manager.timeLeft.ToString("F2");
         if(!manager.gameIsPaused)
         { pauseGUI.enabled = false; }
@@ -36,7 +41,14 @@ public class Interface : MonoBehaviour {
         if(manager.gameOver)
         { endGameGUI.enabled = true; }
         else { endGameGUI.enabled = false; }
-        if (manager.isGameOn()) { startGUI.enabled = false; }
+        if (manager.gameIsOn) { 
+            startGUI.enabled = false;
+            txtTutorial.enabled = false;
+        }
+        else { txtTutorial.enabled = manager.tutorial; }
+        if (manager.tutorial) { startGUI.enabled = false; }
+
+
 
 	}
 
