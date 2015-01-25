@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class InputScreen : MonoBehaviour {
 
 	private GameManager manager;
 
-	public Sprite[] ButtonSprites;
+	public Image[] ButtonSprites;
 	public bool[,] InputTable;
 
 	// Use this for initialization
@@ -40,6 +41,20 @@ public class InputScreen : MonoBehaviour {
 			}
 		}
 	}
+
+	public void UpdateInputIcons(){
+		for(int i=0 ; i< 48; i++) {
+			if(i<12) ActivateButton(i,InputTable[0,i]);
+			if(i<24) ActivateButton(i,InputTable[1,i-12]);
+			if(i<36) ActivateButton(i,InputTable[2,i-24]);
+			else ActivateButton(i,InputTable[3,i-36]);
+		}
+	}
+
+	private void  ActivateButton(int index, bool isActive){
+		ButtonSprites[index].color = new Color(0,0,0,0.2f);
+	}
+
 
 
 }
