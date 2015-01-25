@@ -149,6 +149,11 @@ public class Interface : MonoBehaviour {
 			
 	}
 
+	public void EndAllAnimations() {
+		foreach (Animator a in buttonEffectsAnimators) {
+			a.SetBool("ReadyInput", false);
+		}
+	}
 
 	private void ChangeLastSelectionText(int color, int choice, choiceType type){
 		string choiceString;
