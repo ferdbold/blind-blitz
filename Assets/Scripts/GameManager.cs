@@ -5,10 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using XInputDotNetPure;
 
-
-
 public enum choiceType {arrows,buttons,triggers};
-
 
 public class GameManager : MonoBehaviour {
 
@@ -16,7 +13,6 @@ public class GameManager : MonoBehaviour {
 	public PlayerChoice currentChoice;
 	public Interface myInterface;
 
-    int cptAffichageMenu = 0;
     const int NOMBRE_MENUS = 4;
 
 	public float timeLeft;
@@ -61,7 +57,6 @@ public class GameManager : MonoBehaviour {
 	public List<int> ColorPool;
 	private int poolSize = 3;
    
-
 	//Sounds
 	public List<AudioClip> myAudioClips; //List of Audioclips used
     public AudioClip Music;
