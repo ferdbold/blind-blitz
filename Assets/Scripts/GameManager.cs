@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour {
     private float malusTemps = 1;
     const int CHOICE_DELAY = 5;
 
-
 	//Colors
 	[HideInInspector] public int previousColor;
 	private int currentColor = -1; //current color, we start with -1 which is none
@@ -79,7 +78,6 @@ public class GameManager : MonoBehaviour {
 	void OnApplicationQuit(){
 		RumbleController(0);
 	}
-	
 
 	// Update is called once per frame
     void Update()
@@ -101,6 +99,13 @@ public class GameManager : MonoBehaviour {
                 if (Input.GetButtonDown("Start")) Pause();
             }
         }
+		else if (gameOver) {
+			if (Input.GetButtonDown ("share")) {
+				gameIsOn = false;
+				gameOver = false;
+				myInterface.OpenMenu ();
+			}
+		}
         else
         { // ELse, start game if start pressed
             if (Input.GetButtonDown("Start")) StartGame();
@@ -123,7 +128,6 @@ public class GameManager : MonoBehaviour {
    	 	}
 	}
     
-
     void Pause() {
 		//Debug.Log ("Paused");
         gameIsPaused = true;
@@ -354,6 +358,7 @@ public class GameManager : MonoBehaviour {
 	void StartGame() {
 		// Close menu
 		myInterface.CloseMenu ();
+		myInterface.CloseEndGameMenu ();
 
 		isFirstInput = true; //Game has restarted, back to 1st input
 		//Restart Time
@@ -387,6 +392,8 @@ public class GameManager : MonoBehaviour {
 		RumbleController(0);
 		isHeavyRumbling = false;
 		isLightRumbling = false;
+
+		myInterface.OpenEndGameMenu();
 	}
 
 	public void RumbleController(float intensity) {

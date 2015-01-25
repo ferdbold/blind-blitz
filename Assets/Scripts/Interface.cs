@@ -5,12 +5,12 @@ public class Interface : MonoBehaviour {
 
 	public Text timerGUI;
     public Text pauseGUI;
-    public Text endGameGUI;
     public Text startGUI;
 
 	public CanvasGroup mainMenu;
 	public CanvasGroup menuMainScreen;
     public CanvasGroup tutorialScreen;
+	public CanvasGroup endGameScreen;
 
 	public Image[] options;
 	public Image[] secOptions;
@@ -38,27 +38,12 @@ public class Interface : MonoBehaviour {
 
 	void Update () {
 		//Timer
-        if(manager.gameIsOn)
-        { bgMenu.enabled = false; }
-
 		timerGUI.text = manager.timeLeft.ToString("F2");
 
         if(!manager.gameIsPaused)
         { pauseGUI.enabled = false; }
         else
         { pauseGUI.enabled = true; }
-
-        if(manager.gameOver)
-        { endGameGUI.enabled = true; }
-        else { endGameGUI.enabled = false; }
-
-        /*if (manager.gameIsOn) { 
-            startGUI.enabled = false;
-            txtTutorial.enabled = false;
-        }
-        else { txtTutorial.enabled = manager.tutorial; }
-
-        if (manager.tutorial) { startGUI.enabled = false; }*/
 	}
 
 	public void OpenTutorial() {
@@ -70,10 +55,19 @@ public class Interface : MonoBehaviour {
 		mainMenu.alpha = 1;
 		menuMainScreen.alpha = 1;
 		tutorialScreen.alpha = 0;
+		endGameScreen.alpha = 0;
 	}
 
 	public void CloseMenu() {
 		mainMenu.alpha = 0;
+	}
+
+	public void OpenEndGameMenu() {
+		endGameScreen.alpha = 1;
+	}
+
+	public void CloseEndGameMenu() {
+		endGameScreen.alpha = 0;
 	}
 
 	public void ChangeOptions(PlayerChoice p){
