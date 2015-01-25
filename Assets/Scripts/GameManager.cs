@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour {
 				gameOver = false;
 				myInterface.OpenMenu ();
 			}
+			if (Input.GetButtonDown("Start")) StartGame();
 		}
         else
         { // ELse, start game if start pressed
@@ -393,6 +394,8 @@ public class GameManager : MonoBehaviour {
 		isHeavyRumbling = false;
 		isLightRumbling = false;
 
+		myInterface.EndAllAnimations ();
+		myInputScreen.UpdateInputIcons();
 		myInterface.OpenEndGameMenu();
 	}
 
