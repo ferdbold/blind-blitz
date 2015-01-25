@@ -145,7 +145,6 @@ MonoBehaviour:
   tickToChangeColor: 3
   ColorPool: 
   myAudioClips: []
-  Music: {fileID: 0}
 --- !u!4 &79124294
 Transform:
   m_ObjectHideFlags: 0
