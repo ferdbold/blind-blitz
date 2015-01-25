@@ -393,6 +393,7 @@ public class GameManager : MonoBehaviour {
 		isHeavyRumbling = false;
 		isLightRumbling = false;
 
+		myInputScreen.UpdateInputIcons();
 		myInterface.OpenEndGameMenu();
 	}
 

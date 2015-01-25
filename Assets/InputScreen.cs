@@ -45,15 +45,18 @@ public class InputScreen : MonoBehaviour {
 	public void UpdateInputIcons(){
 		for(int i=0 ; i< 48; i++) {
 			if(i<12) ActivateButton(i,InputTable[0,i]);
-			if(i<24) ActivateButton(i,InputTable[1,i-12]);
-			if(i<36) ActivateButton(i,InputTable[2,i-24]);
+			else if(i<24) ActivateButton(i,InputTable[1,i-12]);
+			else if(i<36) ActivateButton(i,InputTable[2,i-24]);
 			else ActivateButton(i,InputTable[3,i-36]);
 		}
 	}
 
 	private void  ActivateButton(int index, bool isActive){
-		if(isActive) ButtonSprites[index].color = new Color(1,1,1,1f);
-		else ButtonSprites[index].color = new Color(1,1,1,0.2f);
+
+			if(isActive) ButtonSprites[index].color = new Color(1,1,1,1f);
+			else ButtonSprites[index].color = new Color(1,1,1,0.2f);
+		
+
 	}
 
 
